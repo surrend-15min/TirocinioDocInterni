@@ -4,7 +4,7 @@
 \usepackage{titling}
 \geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
 \usepackage{graphicx}
-\providecommand{\versionnumber}{0.0.1}
+\providecommand{\versionnumber}{1.0.0}
 \usepackage{enumitem}
 \usepackage{array}
 \usepackage[italian]{babel}
@@ -53,7 +53,7 @@ Un processo è la serie di passaggi che vengono eseguiti in un ordine particolar
 È nel miglior interesse dell'azienda standardizzare i processi più comuni e ad alto volume. In questo modo si garantisce che le cose vengano fatte nel miglior modo possibile, si rende più facile determinare quando le cose vanno storte e si facilita la capacità di formare nuovi o esistenti dipendenti nel modo migliore per svolgere il loro lavoro.\\
 Non importa quanto sia buono un processo, ci sono modi per renderlo migliore.\\
 
-\section{Migliorare i processi}
+\subsection{Migliorare i processi}
 Ecco alcuni dei modi fondamentali per cambiare i processi e renderli migliori:
 \begin{itemize}
     \item \custombold{Standardizzazione}: Rendere il processo il più ripetibile possibile e garantire che il processo attuale corrisponda al processo progettato.
@@ -61,4 +61,91 @@ Ecco alcuni dei modi fondamentali per cambiare i processi e renderli migliori:
     \item \custombold{Ottimizzazione}: Riprogettare il processo per produrre più valore, come migliorare la qualità o ridurre i costi.
     \item \custombold{Automazione}: Eliminare gli aspetti del processo che richiedono sforzi umani.
 \end{itemize}
+
+\section{Process Mining}
+Il process mining è un ambito di studio della gestione dei processi aziendali che si occupa dell'analisi dei processi operativi di un'organizzazione basandosi su dati generati dai sistemi informatici. Il suo obiettivo principale è scoprire, monitorare e migliorare i processi reali attraverso l'estrazione e l'analisi dei log di eventi registrati dai sistemi informativi.\\
+Ciò che rende possibile il process mining è il fatto che molti dei processi aziendali più diffusi vengono eseguiti tramite sistemi informativi. In senso generale, l'estrazione comporta la ricerca e l'estrazione di qualcosa di valore. Il process mining estrae conoscenze preziose dai log degli eventi prodotti dai sistemi informativi.\\
+Per comprendere al meglio il funzionamento del process mining si deve ricordare che un processo è una serie di azioni o passaggi che vanno da un punto di partenza a un punto di arrivo riconosciuto. Questi passaggi possono essere ripetuti e possono essere migliorati nella speranza di passare dal punto di partenza al punto di arrivo nel modo più efficiente e coerente possibile. Quando questi passaggi avvengono in un sistema transazionale, lasciano un'impronta digitale sotto forma di dati dei log degli eventi. Il process mining estrae quei dati e li utilizza per creare un'immagine di come i processi appaiono effettivamente nella pratica.\\
+L'aspetto reale di un processo può o meno corrispondere al modo in cui il processo è stato originariamente definito. I processi tendono a cambiare nel tempo e, indipendentemente da quanto bene siano stati pianificati in origine, possono facilmente deviare. Con il passare del tempo, le deviazioni nel percorso possono diventare la regola, non l'eccezione. La capacità di aggiornare e correggere i processi in modo efficiente dipende dall'ottenere una visibilità completa e in tempo reale su come funzionano i processi.\\
+\subsection{Vantaggi del Process Mining}
+Ecco alcuni dei principali vantaggi del process mining rispetto ai tradizionali metodi di miglioramento dei processi:
+\begin{itemize}
+    \item \custombold{Obiettività}: Il process mining offre approfondimenti basati su fatti che provengono da dati reali.
+    \item \custombold{Velocità e accuratezza}: Il process mining sostituisce il process mapping, che è manuale, più faticoso e più soggettivo. Il process mining è rapido ed economico, inoltre la sua obiettività ne aumenta l'accuratezza.
+    \item \custombold{Evita il rip-and-replace}: Il process mining funziona con sistemi esistenti. Di fatto si tratta di uno "strato" sopra l'infrastruttura IT.
+\end{itemize}
+\subsection{L'importanza del Process Mining}
+I principali motivi per cui il process mining è così importante sono:
+\begin{itemize}
+    \item \custombold{Visibilità completa sui processi}: Offre una visione oggettiva e in tempo reale basata sui dati IT.
+    \item \custombold{Quantificazione dell'impatto}: Con una migliore comprensione delle lacune nei processi, puoi dimostrare il valore prima e dopo aver implementato una soluzione.
+    \item \custombold{Coinvolgimento degli stakeholder}: Con suggerimenti di soluzioni basati sui dati e con un ritorno sugli investimenti (ROI) allegato, è molto più facile ottenere consenso e allineamento.
+    \item \custombold{Impostazione delle priorità}: Comprendere l'impatto delle lacune specifiche nei processi sui risultati aziendali aiuta a dare priorità alle risorse.
+    \item \custombold{Raggiungimento rapido del valore}: Il process mining è facile e veloce da implementare.
+\end{itemize}
+\subsection{Come funziona il Process Mining}
+\subsubsection{Raccolta dei dati}
+Al giorno d'oggi, i processi aziendali sono piuttosto complessi. Sono altamente digitalizzati, avvengono all'interno di una vasta gamma di sistemi informativi. I processi potrebbero operare su diversi sistemi che elaborano diversi tipi di dati, gestiti da un grande numero di persone che lavorano in più dipartimenti.\\
+Per ottenere una visione dettagliata del tuo processo attraverso il process mining, è necessario che i tuoi strumenti accedano ai dati degli eventi, e ci sono diversi modi per farlo. Un modo è esportare un log degli eventi dal sistema, ottenendo un file di valori separati da virgola che lo strumento di process mining può importare. I metodi di process mining più avanzati utilizzano l'acquisizione dei dati in tempo reale, che sincronizza costantemente i dati del processo più recenti.\\
+Nel log degli eventi sono presenti, al minimo, questi tre dati di processo per ciascun evento individuale:
+\begin{itemize}
+    \item \custombold{Identificatore dell'evento}: Un identificatore univoco che distingue ogni evento specifico.
+    \item \custombold{Timestamp}: La data e l'ora esatta in cui l'evento si è verificato.
+    \item \custombold{Attività}: La descrizione dell'azione o dell'attività che è stata eseguita durante l'evento.
+\end{itemize}
+Molti log degli eventi contengono più dettagli rispetto a questi tre elementi. Alcuni dei dettagli aggiuntivi che possono essere inclusi sono:
+\begin{itemize}
+    \item \custombold{Identificatore del caso}: Un identificatore univoco per ogni processo o caso specifico, che collega una serie di eventi correlati.
+    \item \custombold{Utente o risorsa}: Informazioni su chi ha eseguito l'azione o quale risorsa è stata utilizzata.
+    \item \custombold{Tipo di evento}: La categoria o il tipo dell'evento, com "inizio", "fine" o altre fasi specifiche del processo.
+    \item \custombold{Durata}: Il tempo impiegato per completare l'evento o l'attività.
+    \item \custombold{Parametri specifici}: Qualsiasi dato aggiuntivo rilevante per l'evento, come quantità, costi, o altre metriche specifiche del processo.
+    \item \custombold{Note o commenti}: Annotazioni aggiuntive che possono fornire ulteriori contesti o dettagli sull'evento.
+\end{itemize}
+Questi dettagli aggiuntivi aiutano a creare una rappresentazione più completa e accurata del processo, permettendo analisi più approfondite e precise.
+\subsubsection{Scoperta dei processi}
+La fase nota come "scoperta dei processi" coinvolge l'uso dei log degli eventi per creare una visualizzazione end-to-end del processo. Segue ogni passaggio che ogni caso ha compiuto mentre si muoveva attraverso il ciclo, dall'inizio alla fine. Sovrappone tutti quei percorsi in una sola visualizzazione, una sequenza cronologica degli eventi dal principio alla fine (alcuni chiamano questa "digital twin").\\
+Ci sono diversi modi per arrivare da un punto all'altro, con variazioni nel percorso che un processo potrrebbe eseguire. Nel process mining, quei percorsi leggermente diversi sono noti come varianti. Possono esserci centinaia o migliaia di varianti diverse che compaiono sulla mappa dei processi creata dallo strumento di mining.
+\subsubsection{Analisi dei processi}
+Nel mondo reale, problemi e inefficienze sono comuni, e c'è sempre spazio per migliorare. La fase di analisi dei processi del process mining è dove inizi a scavare nelle cause profonde delle inefficienze dei processi e a quantificare come stanno influenzando gli indicatori chiave di prestazione (KPI).\\
+Mentre l'analisi approfondisce le cause delle inefficienze dei processi, ecco alcune delle domande da porsi:
+\begin{itemize}
+    \item Dove sono i colli di bottiglia nel processo?
+    \item Cosa sta causando i ritardi in alcuni casi?
+    \item Quali risorse sono sovraccaricate?
+    \item Quali attività vengono saltate più spesso?
+    \item Quali risorse creano deviazioni?
+\end{itemize}
+Per quanto riguarda la quantificazione dell'impatto delle varianti e delle inefficienze, queste sono le domande da porsi:
+\begin{itemize}
+    \item Come impatta questa particolare variante su un certo KPI del processo?
+    \item In che modo l'automazione riduce il tempo del ciclo del processo?
+    \item Qual è la percentuale di passaggi nel processo che sono automatizzati?
+    \item Qual è la percentuale di casi che seguono il processo stabilito e qual è la percentuale che non si conforma?
+\end{itemize}
+\subsubsection{Benchmarking dei processi}
+Mentre si accumulano inforazioni dei processi tramite il process mining, si possono confrontare le prestazioni dei processi su diverse dimensioni. Questo può essere d'aiuto per individuare i migliori esecutori o identificare i punti problematici e, infine, applicare lezioni e best practice da un luogo all'altro, ad esempio tra team, unità aziendali o aree geografiche.
+\subsubsection{Verifica della conformità}
+La verifica della confermità è la parte del process mining dove si vede la differenza tra il modo ideale nel quale processo dovrebbe essere e il modo nel quale è in realmente in pratica.\\
+La verifica della conformità misura dove si trova veramente il processo reale e quale percentuale dei casi conforma effettivamente al processo desiderato. Questo aiuta a determinare quando i passaggi vengono eseguiti nell'ordine sbagliato o forse saltati del tutto. È possibile vedere esattamente quando le cose richiedono più tempo del previsto in determinate fasi del processo.
+
+\section{Task Mining}
+Il task mining è un ambito di studio che si occupa dell'analisi e della comprensione delle attività svolte dagli utenti all'interno di un'organizzazione, con l'obiettivo di ottimizzare e automatizzare i processi aziendali a un livello più granulare rispetto al process mining. Mentre il process mining si concentra sui processi aziendali nel loro complesso, il task mining si concentra sulle singole attività o compiti eseguiti dai dipendenti.\\
+Il task mining sfrutta la tecnologia di riconoscimento ottico dei caratteri (OCR). Utilizza l'elaborazione del linguaggio naturale (NLP) ed è supportato da algoritmi di machine learning per comprendere realmente le azioni che le persone compiono sui loro desktop e individua i modelli che influenzano i risultati aziendali.\\
+I principi fondamentali di come funziona il task mining:
+\begin{itemize}
+    \item \custombold{Cattura dati dal desktop}: Si tiene traccia di click, scroll, screenshot, timestamp ed altre azioni.
+    \item \custombold{Aggiunta del contensto aziendale}: Si raccoglie, tramite l'OCR, tutto il testo e i numeri sullo schermo per contestualizzare ciò che sta accadendo.
+    \item \custombold{Raggruppamento di attività}: Le tecnologie di NLP e intelligenza artificiale comprendono ogni azione e raggruppano le azioni in attività complessive di cui fanno parte.
+    \item \custombold{Abbinamento dei dati aziendali}: L'informazione identificativa consente al software di task mining di correlare ciò che l'utente sta facendo con specifici dati aziendali nei sistemi operativi, permettendo di capire realmente come le azioni influiscano sui risultati aziendali.
+    \item \custombold{Ottimizzazione del processo}: Tutte le informazioni raccolte possono essere utilizzate per ottimizzare i processi e migliorare le prestazioni aziendali tramite l'uso di un sistema di gestione dell'esecuzione.
+\end{itemize}
+\subsection{L'importanza del Task Mining}
+Il task mining è importante per una serie di motivi che lo rendono benefico per quasi ogni impresa:
+\begin{itemize}
+    \item Scoprire inefficienze nei modelli di lavoro al di fuori dei sistemi transazionali.
+    \item Migliorare la capacità di misurare e ottimizzare la produttività della forza lavoro.
+    \item Collegare i processi manuali con i processi aziendali, guidando le prossime migliori azioni sul desktop.
+\end{itemize}
+Il process mining e il task mining offrono molti vantaggi, in particolare la loro combinazione è molto potente.
 \end{document}
