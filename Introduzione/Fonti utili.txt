@@ -1,0 +1,18 @@
+Fonti utili:
+Process Mining
+https://www.ibm.com/topics/process-mining
+https://www.ionos.it/digitalguide/online-marketing/vendere-online/process-mining/
+Gestione Aziendale
+https://www.delphiethica.com/blog/gestione-aziendale/pianificazione-strategica-aziendale-cos-e-fasi-e-strumenti
+https://strategiaebusiness.com/controllo-di-gestione/
+https://www.jobiri.com/guida-organizzazione-aziendale-definizione-modelli-esempi/
+Database
+https://www.datacamp.com/blog/types-of-databases-overview
+https://phoenixnap.com/kb/database-types
+https://www.mongodb.com/resources/basics/databases/types
+https://www.couchbase.com/resources/concepts/types-of-databases/
+Grafi
+https://www.andreaminini.org/sistemi/reti-di-petri/#quali_sono_i_vantaggi_delle_rete_di_petri
+https://link.springer.com/chapter/10.1007/978-3-030-72693-5_21
+https://github.com/multi-dimensional-process-mining/eventgraph_tutorial
+https://appian.com/process-mining/direct-follower-graph
