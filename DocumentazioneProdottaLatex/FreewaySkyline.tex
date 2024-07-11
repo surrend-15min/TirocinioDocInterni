@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[includeheadfoot, margin=1em,headheight=2em]{geometry}
+\usepackage{titling}
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
+\usepackage{graphicx}
+\providecommand{\versionnumber}{1.0.0}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[italian]{babel}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\setlength{\droptitle}{-6em}
+
+%font
+\usepackage[defaultfam,tabular,lining]{montserrat}
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\fontfamily{Montserrat-TOsF}\selectfont #1}}
+
+%custom bold 
+\usepackage[outline]{contour}
+\usepackage{xcolor}
+\newcommand{\custombold}{\contour{black}}
+
+%table colors
+\usepackage{color, colortbl}
+\definecolor{Blue}{rgb}{0.51,0.68,0.79}
+\definecolor{LightBlue}{rgb}{0.82,0.87,0.90}
+\definecolor{LighterBlue}{rgb}{0.93,0.95,0.96}
+
+%Header
+\usepackage{fancyhdr, xcolor}
+\pagestyle{fancy}
+\let\oldheadrule\headrule% Copy \headrule into \oldheadrule
+\renewcommand{\headrule}{\color{Blue}\oldheadrule}% Add colour to \headrule
+\renewcommand{\headrulewidth}{0.2em}
+\fancyhead[L]{Studio FreewaySkyline}
+\fancyhead[C]{Samuele Vignotto}
+\fancyhead[R]{\includegraphics[height=1cm]{Logo/Y_LOGO-SOLO.png}}
+\setcounter{secnumdepth}{0}
+
+\title{\Huge{\textbf{FreewaySkyline}}\vspace{-1em}}
+\author{Samuele Vignotto}
+\date{}
+\begin{document}
+\maketitle
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6cm, height=6cm]{Logo/Y_LOGO-SOLO.png}
+  \label{fig:immagine}
+\end{figure}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+Il software Freeway Skyline prodotto da Eurosystem è un sistema di gestione ERP (Enterprise Resource Planning) progettato per ottimizzare i processi aziendali e ridurre i tempi operativi. É una soluzione multi-azienda e multilingua che permette di standardizzare, semplificare e automatizzare tutti i processi aziendali, fornendo una gestione integrata di tutti i settori dell'impresa, dalla produzione alla contabilità, passando per la logistica e le vendite.
+
+\section{Caratteristiche principali}
+\subsection{Flessibilità e modularità}
+Freeway Skyline permette alle aziende di personalizzare il software in base alle proprie esigenze specifiche. Questo include moduli per la gestione delle commesse, la pianificazione della produzione, la gestione dei materiali, e la gestione dei rapporti con i clienti.
+\subsection{Integrazione e interoperabilità}
+Il software può essere integrato con diversi sistemi gestionali e tecnologie aziendali, inclusi database relazionali come Oracle.
+\subsection{Settori di applicazione}
+Freeway Skyline è adatto a una vasta gamma di settori industriali, inclusi quello manifatturiero, alimentare, chimico, e commerciale. É particolarmente utile per le aziende che operano su commessa, poiché permette di monitorare e ottimizzare ogni fase del processo produttivo.
+\subsection{Funzionalità di ricerca avanzata}
+Il sistema include Freeway SENSE, una funzionalità di motore di ricerca che velocizza la ricerca di informazioni, dati e documenti all'interno del sistema informativo aziendale.
+\subsection{Supporto all'industria 4.0}
+Freeway Skyline è progettato per supportare le iniziative di digitalizzazione e automazione tipiche dell'industria 4.0, aiutando le aziende a innovare e migliorare l'efficienza operativa attraverso l'uso di tecnlologie avanzate.
+
+\section{Dati gestiti da Freeway Skyline}
+
+\subsection{Dati di produzione}
+
+\subsubsection{Ordini di Produzione}
+Dettagli sugli ordini di produzione, incluse le specifiche dei prodotti, le quantità da produrre, le scadenze e le risorse assegnate.
+\subsubsection{Controllo qualità}
+Informazioni sui controlli di qualità effettuati durante e dopo la produzione, compresi i risultati dei test e le eventuali azioni correttive.
+\subsubsection{Material Requirements Planning}
+Dati relativi alla pianificazione dei materiali necessari per la produzione, incluse le previsioni di fabbisogno e le scorte disponibili.
+
+\subsection{Dati di vendita e Customer Relationship Management}
+\subsubsection{Gestione preventivi e offerte}
+Dettagli sui preventivi e le offerte inviate ai clienti, comprese le condizioni di vendita, i prezzi e i tempi di consegna.
+\subsubsection{Anagrafiche clienti}
+Informazioni sui clienti, come dettagli di contatto, storico degli ordini, preferenze e attività di marketing.
+
+\subsection{Dati contabili e finanziari}
+\subsubsection{Contabilità generale}
+Registrazione delle transazioni finanziarie, inclusi i registri contabili, le voci di bilancio e i report finanziari.
+\subsubsection{Gestione delle fatture}
+Dati relativi alla fatturazione, comprese le fatture emesse e ricevute, i pagamenti e le scadenze.
+
+\subsection{Dati di logistica e magazzino}
+\subsubsection{Gestione inventario}
+Informazioni sulle scorte di magazzino, compresi i livelli di stock, i movimenti delle merci e le ubicazioni dei prodotti.
+\subsubsection{Spedizioni e ricevimenti}
+Dettagli sulle spedizioni ai clienti e sulle merci ricevute dai fornitori, compresi i documenti di trasporto e le everifiche di conformità.
+
+\subsection{Dati di risorse umane}
+\subsubsection{Anagrafiche dipendenti}
+Informazioni sui dipendenti, incluse le informazioni personali, le qualifiche, i contratti di lavoro e le ore lavorate.
+\subsubsection{Gestione delle presenze}
+Dati sulle presenze e assenze dei dipendenti, turni di lavoro e permessi.
+
+\section{Madalità di salvataggio dei dati}
+Il software Freeway Skyline utilizza un database relazionale, integrato con Oracle.\\
+In Freeway Skyline, i dati sono organizzati in tabelle strutturate, facilmente interrogabili e gestibili tramite SQL (Structured Query Language). Oracle, come database principale supportato, garantisce elevati standard di sicurezza e prestazioni. Questo permette alle aziende di gestire i propri dati in modo centralizzato, fornendo agli utenti l'accesso a informazioni specifiche attraverso un portale di navigazione con vista profilata, in base ai loro ruoli.\\
+
+\end{document}
