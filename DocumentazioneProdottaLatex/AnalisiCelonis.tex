@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[includeheadfoot, margin=1em,headheight=2em]{geometry}
+\usepackage{titling}
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
+\usepackage{graphicx}
+\providecommand{\versionnumber}{1.0.0}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[italian]{babel}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\setlength{\droptitle}{-6em}
+
+%font
+\usepackage[defaultfam,tabular,lining]{montserrat}
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\fontfamily{Montserrat-TOsF}\selectfont #1}}
+
+%custom bold 
+\usepackage[outline]{contour}
+\usepackage{xcolor}
+\newcommand{\custombold}{\contour{black}}
+
+%table colors
+\usepackage{color, colortbl}
+\definecolor{Blue}{rgb}{0.51,0.68,0.79}
+\definecolor{LightBlue}{rgb}{0.82,0.87,0.90}
+\definecolor{LighterBlue}{rgb}{0.93,0.95,0.96}
+
+%Header
+\usepackage{fancyhdr, xcolor}
+\pagestyle{fancy}
+\let\oldheadrule\headrule% Copy \headrule into \oldheadrule
+\renewcommand{\headrule}{\color{Blue}\oldheadrule}% Add colour to \headrule
+\renewcommand{\headrulewidth}{0.2em}
+\fancyhead[L]{Analisi Celonis}
+\fancyhead[C]{Samuele Vignotto}
+\fancyhead[R]{\includegraphics[height=1cm]{Logo/Y_LOGO-SOLO.png}}
+\setcounter{secnumdepth}{0}
+
+\title{\Huge{\textbf{Analisi della piattaforma di process mining Celonis}}\vspace{-1em}}
+\author{Samuele Vignotto}
+\date{}
+\begin{document}
+\maketitle
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6cm, height=6cm]{Logo/Y_LOGO-SOLO.png}
+  \label{fig:immagine}
+\end{figure}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+
+Il process mining è una disciplina emergente che combina tecniche di data mining e di analisi dei processi aziendali per fornire una visione approfondita dei processi operativi di un'organizzazione. Una delle piattaforme leader in questo campo è Celonis, una soluzione di process mining avanzata che permette alle aziende di ottimizzare e migliorare continuamente i propri processi aziendali.
+
+\subsection{Estrazione Automatica dei Dati}
+
+Celonis si distingue per la sua capacità di estrarre automaticamente dati da vari sistemi informatici aziendali, tra cui ERP (Enterprise Resource Planning), CRM (Customer Relationship Management) e altri sistemi transazionali. Utilizzando queste informazioni, Celonis crea una rappresentazione visiva e dettagliata dei processi aziendali reali, consentendo agli utenti di identificare inefficienze, colli di bottiglia e deviazioni dai processi standard.
+
+\subsection{Analisi in Tempo Reale}
+
+Una delle funzionalità chiave di Celonis è la sua capacità di fornire un'analisi in tempo reale. Questa caratteristica permette alle organizzazioni di monitorare i propri processi in modo continuo, rilevando e risolvendo problemi immediatamente. Inoltre, Celonis offre potenti strumenti di visualizzazione che permettono agli utenti di esplorare i dati da diverse prospettive, identificando facilmente le aree critiche che necessitano di miglioramenti.
+
+\subsection{Benchmarking}
+
+Un altro aspetto fondamentale di Celonis è la sua funzione di benchmarking, che consente alle aziende di confrontare le proprie prestazioni con quelle di altre organizzazioni o con standard di settore. Questo confronto aiuta a identificare le migliori pratiche e a impostare obiettivi di miglioramento realistici.
+
+\subsection{Integrazione con Machine Learning e Intelligenza Artificiale}
+
+Celonis supporta anche l'integrazione con tecniche di machine learning e intelligenza artificiale, permettendo di prevedere l'andamento dei processi e di suggerire azioni correttive proattive. Questo approccio predittivo è particolarmente utile per anticipare problemi potenziali e mitigare rischi operativi.
+
+\subsection{Automazione dei Processi}
+
+Inoltre, Celonis offre funzionalità di automazione dei processi, che permettono di implementare rapidamente miglioramenti identificati attraverso il process mining. Questo porta a una riduzione dei tempi di ciclo, a una maggiore conformità e a un miglioramento generale dell'efficienza operativa.
+
+
+\end{document}
