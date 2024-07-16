@@ -23,7 +23,7 @@ Questo repository è stato creato per organizzare e documentare tutto il lavoro 
 - **DocumentazioneProdottaLatex/**: Contiene la documentazione prodotta in latex.
 - **Introduzione/**: Contiene il materiale fornito per lo studio.
 - **Logo/**: Contiene il logo aziendale.
-- **SimulazioneDati**: Contiene le simulazioni dei dati utilizzate per l'analisi di Celonis.
+- **SimulazioneDati/**: Contiene le simulazioni dei dati utilizzate per l'analisi di Celonis.
 
 ## Contatti
 
