@@ -104,7 +104,14 @@ Uno dei principali vantaggi di Celonis è la sua capacità di connettersi a una 
 \subsubsection{Svantaggi della Piattaforma}
 L'integrazione dei dati in Celonis può presentare alcune sfide. L'aggiornamento e la manutenzione delle connessioni ai vari sistemi possono risultare complessi, soprattutto in ambienti IT eterogenei. Infine, l'uso intensivo di risorse durante i processi di estrazione e trasformazione può influire sulle prestazioni dei sistemi coinvolti.
 
-\section{Implementazioni pratiche di inserimento dei dati: simulazioni}
+\section{Business miner}
+Business Miner di Celonis è un'applicazione progettata per aiutare le aziende a scoprire, analizzare e ottimizzare i loro processi aziendali. Utilizzando la tecnologia avanzata di process mining, Business Miner permette di esaminare i dati operativi, identificare inefficienze e proporre soluzioni basate su dati concreti.\\
+Attraverso un'interfaccia intuitiva e user-friendly, gli utenti possono visualizzare mappature precise dei flussi di lavoro, individuare colli di bottiglia, e monitorare le prestazioni.\\
+Una delle caratteristiche distintive di Business Miner è la sua capacità di fornire insights immediati grazie all'intelligenza artificiale e agli algoritmi di machine learning. Questi strumenti analizzano grandi volumi di dati per individuare pattern e tendenze nascoste, suggerendo modifiche operative che possono portare a significativi miglioramenti in termini di efficienza e produttività.\\
+L'applicazione offre funzionalità di reportistica avanzata, che consentono di creare report personalizzati e dashboard interattive, facilitando la condivisione di informazioni e la presa di decisioni informate. La sua flessibilità e scalabilità la rendono adatta a organizzazioni di diverse dimensioni e settori.\\
+
+\section{Implementazioni pratiche di Business Miner: simulazioni}
+
 \subsection{Prima simulazione}
 \subsubsection{Struttura del file CSV}
 Il file CSV con i dati simulati contiene informazioni riguardanti le attività di una ditta che riceve prodotti da un'azienda, li vende online e li spedisce ai clienti. La struttura del file è la seguente:
@@ -207,4 +214,199 @@ Celonis ha identificato vari colli di bottiglia nei dati simulati. Tra questi, l
 Questa analisi approfondita ha evidenziato come Celonis possa identificare i punti deboli nei processi aziendali e suggerire miglioramenti concreti, contribuendo a ottimizzare l'efficienza operativa complessiva.
 \subsubsection{Conclusioni}
 Il file con i dati simulati ha permesso di testare efficacemente le funzionalità del modulo Business Miner di Celonis. La piattaforma si è dimostrata capace di fornire una visione dettagliata dei processi aziendali, identificare inefficienze e suggerire miglioramenti concreti. Le analisi eseguite hanno evidenziato come Celonis possa essere utilizzato per analisi più complesse e realistiche, offrendo un potente supporto per l'ottimizzazione dei processi aziendali.
+
+\subsection{Seconda simulazione}
+Il file CSV è stato creato mediante uno script Python che simula una serie di attività relative alla produzione e alla gestione degli ordini di prodotti. Inoltre, per la simulazione dei dati, sono stati presi in considerazione anche i dati estratti manualmente da un database di un sistema gestionale.
+\subsubsection{Regole di simulazione dei dati}
+\custombold{Impostazione delle date iniziali}\\
+Ogni ciclo di attività inizia con la prima attività programmata tra il 1 gennaio 2019 e il 31 dicembre 2020.\\
+\custombold{Definizione delle tipologie di prodotti}\\
+Viene creata una lista di 30 tipi di scarpe, denominate "Scarpe tipo 1" fino a "Scarpe tipo 30".\\
+\custombold{Definizione delle attività e delle durate}\\
+Sono state definite 17 attività, ciascuna con un ID unico e una durata variabile. Le durate delle attività sono espresse in minuti o giorni, a seconda dell'attività specifica.\\
+\custombold{Generazione di un ciclo di attività per prodotto}\\
+Per ciascun prodotto, viene generato un ciclo di attività che segue le seguenti regole:
+\begin{itemize}
+    \item \custombold{attività obbligatorie}: alcune attività avvengono in un ordine fisso. Ad esempio, "COnferma ordine" è sempre seguita da "Creazione progetto";
+    \item \custombold{modifica del progetto}: un numero casuale di modifiche al progetto (da 1 a 5) può essere aggiunto dopo la creazione del progetto;
+    \item \custombold{gestione degli ordini fornitore}: un numero casuale (da 1 a 3) di cicli di gestione ordini fornitore può essere inserito, ognuno dei quali può includere attività come "Ordine fornitore", "Arrivo offerta fornitore", "Ordine annullato", o "Ordine sospeso";
+    \item \custombold{produzione}: vengono aggiunte attività relative alla produzione, come "Stampa scheda di produzione", "Inizio ciclo di produzione" e "Termine ordine di produzione";
+    \item \custombold{fatturazione e consegna}: dopo la produzione, vengono aggiunte le attività di "Invio fattura cliente" e "Consegna". La ricezione del pagamento della fattura può avvenire in modo casuale prima o dopo la consegna, ma deve avvenire almeno una volta per ciclo.
+\end{itemize}
+\custombold{Generazione dei timestamp}\\
+Ogni attività riceve un timestamp generato casualmente basato su un intervallo di tempo definito per quella specifica attività.\\
+\custombold{Ciclo di generazione dei dati}\\
+Il numero di prodotti varia tra 300 e 500, determinato casualmente. Per ogni prodotto, viene generato un ciclo di attività completo, assicurandosi che tutte le attività obbligatorie siano inserite nel corretto ordine e che le attività casuali siano distribuite come specificato.
+\subsubsection{Monitoraggio del rispetto delle scadenze}
+La funzionalità di monitoraggio del rispetto delle scadenze di Celonis consente di capire se le varie attività del processo vengono completate entro i tempi prestabiliti, identificando eventuali ritardi e le loro cause principali.\\
+\custombold{Configurazione}\\
+La puntualità viene definita in base a due input: un'attività di completamento e un'attività di scadenza. Ad esempio, un ordine è considerato completato in tempo se l'attività di Registrazione Emissione Merci si verifica prima dell'attività di Scadenza Superata. Si tiene anche conto di un periodo di tolleranza.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/SecondaSimulazione/configurazione-meeting-deadlines.png}
+    \caption{Schermata di configurazione del monitoraggio del rispetto delle scadenze}
+    \label{fig:configurazione-meeting-deadlines}
+\end{figure}
+\custombold{Campi di configurazione}\\
+\begin{itemize}
+    \item \custombold{you're meeting your deadlines if}: qui è selezionata l'attività "Pagamento fattura cliente ricevuto". Questo indica che la scadenza viene rispettata se questa attività è completata entro il periodo definito;
+    \item \custombold{completes before}:  qui è selezionata l'attività "Consegna". Questo campo definisce che l'attività "Pagamento fattura cliente ricevuto" deve essere completata prima della "Consegna" per essere considerata in tempo.
+    \item \custombold{with a grace period of}: qui vengono definiti i periodi di tolleranza: \begin{itemize}
+        \item \custombold{5 days before}: un periodo di 5 giorni prima della data di consegna è accettabile.
+        \item \custombold{5 days after}: un periodo di 5 giorni dopo la data di consegna è anch'esso accettabile.
+    \end{itemize}
+\end{itemize}
+\custombold{On-Time rate e grafico del tasso di puntualità nel tempo}\\
+Questa schermata fornisce una panoramica dettagliata delle prestazioni in termini di rispetto delle scadenze per un determinato processo.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/SecondaSimulazione/On-Time-rate-grafico-tasso-puntualita.png}
+    \caption{Schermata di monitoraggio del tasso di puntualità}
+    \label{fig:monitoraggio-on-time-rate}
+\end{figure}
+\custombold{On-Time rate}\\
+La percentuale di casi che hanno rispettato la scadenza. Attualmente è del 28\%, indicando che solo il 28\% delle attività analizzate è stato completato entro il periodo di tolleranza definito.\\
+\begin{itemize}
+    \item \custombold{127 of 446 cases met your deadline}: questo significa che 127 casi su 446 totali hanno rispettato la scadenza;
+    \item \custombold{indicatori di performance collegati}:\begin{itemize}
+        \item \custombold{early rate}: la percentuale di casi completati in anticipo rispetto alla scadenza, che è del 28\%;
+        \item \custombold{late rate}: la percentuale di casi completati in ritardo rispetto alla scadenza, che è del 43\%.
+    \end{itemize}
+\end{itemize}
+\custombold{Grafico del tasso di puntualità nel tempo}\\
+Il grafico mostra l'andamento del tasso di puntualità nel tempo, rappresentando i dati mese per mese.\\
+\begin{itemize}
+    \item \custombold{Asse Y sinistro (On-Time rate)}: rappresenta la percentuale di attività completate in tempo;
+    \item \custombold{asse y destro (Number of cases)}: rappresenta il numero di casi analizzati per ogni mese;
+    \item \custombold{barre azzurre}: indicano il numero di casi per ciascun mese;
+    \item \custombold{linea blu}: indica il tasso di puntualità per ciascun mese.
+\end{itemize}
+\custombold{Analisi e interpretazione}\\
+Il grafico mostra fluttuazioni nel tasso di puntualità nel tempo. Ci sono picchi e cali evidenti, suggerendo che la performance nel rispetto delle scadenze varia notevolmente di mese in mese.\\
+Con un on-time rate del 28\%, si evidenzia un problema significativo nel rispetto delle scadenze, dato che una grande percentuale di attività (72\%) non è stata completata entro i tempi stabiliti.\\
+\custombold{Dettagli specifici}:
+\begin{itemize}
+    \item la \custombold{percentuale di completamento anticipato} (28\%) è la stessa della percentuale di attività completate in tempo, indicando che un numero significativo di attività viene completato molto prima della scadenza.
+    \item la \custombold{percentuale di completamento in ritardo} (43\%) è piuttosto alta, suggerendo che quasi la metà delle attività non viene completata entro i tempi previsti.
+\end{itemize}
+
+\custombold{On-Time breakdown}\\
+Questa tabella offre una suddivisione dettagliata del tasso di puntualità per mese di inizio dei casi analizzati.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/SecondaSimulazione/on-time-breakdown.png}
+    \caption{Tabella di monitoraggio del tasso di puntualità per mese}
+    \label{fig:tabella-on-time-breakdown}
+\end{figure}
+\custombold{Intestazione delle colonne}
+\begin{itemize}
+    \item \custombold{case start month}: mese di inizio dei casi analizzati;
+    \item \custombold{number of cases}: numero di casi iniziati in quel mese specifico;
+    \item \custombold{cases(\%)}: percentuale dei casi rispetto al totale analizzato;
+    \item \custombold{on-time rate}: percentuale di casi completati entro le scadenze per ogni mese.
+\end{itemize}
+
+\custombold{On-Time behavior}\\
+Il grafico rappresenta il comportamento delle attività in relazione alle scadenze.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/SecondaSimulazione/on-time-behavior.png}
+    \caption{Grafico comportamento delle attività in relazione alle scadenze}
+    \label{fig:grafico-on-time-behavior}
+\end{figure}
+\custombold{Barre del grafico}\\
+Il grafico è costituito da una barra suddivisa in tre sezioni di colori diversi, ciascuna rappresentante una diversa categoria di comportamento delle scadenze:
+\begin{itemize}
+    \item \custombold{blu scuro}: rappresenta la percentuale di attività completate in tempo ("On-Time rate");
+    \item \custombold{blu}: rappresenta la percentuale di attività completate in anticipo ("Early rate");
+    \item \custombold{azzurro}: rappresenta la percentuale di attività completate in ritardo ("Late rate").
+\end{itemize}
+\custombold{Dati specifici}
+\begin{itemize}
+    \item \custombold{On-Time rate (28\%)}: percentuale di attività completate entro le scadenze stabilite è del 28\%;
+    \item \custombold{Early rate (28\%)}: percentuale di attività completate in anticipo rispetto alle scadenze è del 28\%;
+    \item \custombold{Late rate (43\%)}: percentuale di attività completate in ritardo rispetto alle scadenze è del 43\%;
+\end{itemize}
+\custombold{Interpretazione del grafico}\\
+Il grafico offre una rappresentazione chiara e sintetica del comportamento delle attività rispetto alle scadenze. La sua suddivisione in tre sezioni permette di comprendere rapidamente come le attività si distribuiscono tra completamento puntuale, anticipato e ritardato.\\
+Un elemento significativo emerso dall'analisi è l'elevato tasso di ritardo: ben il 43\% delle attività viene completato oltre la scadenza, segnalando un problema rilevante nel rispetto dei tempi previsti. Questo dato indica che quasi la metà delle attività non riesce a essere conclusa entro i termini stabiliti.\\
+D'altro canto, le percentuali di puntualità e di completamento anticipato risultano identiche, entrambe al 28\%. Questo significa che un numero analogo di attività viene concluso esattamente nei tempi previsti o addirittura in anticipo, mostrando una certa capacità di gestione efficace, pur evidenziando la necessità di miglioramenti nel rispetto delle scadenze.\\
+
+\custombold{On-Time rate over time}\\
+Il grafico rappresenta l'andamento del tasso di puntualità delle attività nel tempo, mese per mese.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/SecondaSimulazione/on-time-rate-over-time.png}
+    \caption{Grafico del tasso di puntualità delle attività nel tempo}
+    \label{fig:grafico-on-time-rate-over-time}
+\end{figure}
+\custombold{Assi del grafico}
+\begin{itemize}
+    \item \custombold{Asse X (case start by month)}: rappresenta i mesi di inizio dei casi;
+    \item \custombold{asse Y (percentuale)}: rappresenta la percentuale di casi completati, suddivisa in tre categorie: in tempo, in anticipo e in ritardo.
+\end{itemize}
+\custombold{Linee del grafico}
+\begin{itemize}
+    \item \custombold{Linea blu scuro (On-Time rate)}: indica la percentuale di casi completati in tempo per ogni mese;
+    \item \custombold{linea blu (Early rate)}: indica la percentuale di casi completati in anticipo per ogni mese;
+    \item \custombold{linea azzurra (Late rate}: indica la percentuale di casi completati in ritardo per ogni mese.
+\end{itemize}
+\custombold{Analisi e interpretazione}\\
+Il grafico offre una visualizzazione dettagliata e dinamica del tasso di puntualità, dell'anticipo e del ritardo nel tempo. Analizzandolo, è possibile osservare vari trend e fluttuazioni nei tassi di completamento delle attività.\\
+In particolare, si notano variazioni significative nel tasso di puntualità tra i vari mesi, con alcuni periodi caratterizzati da picchi e altri da cali evidenti. Ad esempio, a settembre 2020, il tasso di puntualità è del 30\%, un valore relativamente basso rispetto ad altri periodi.\\
+Sempre a settembre 2020, si registra un elevato tasso di ritardo, con il 60\% delle attività completate oltre la scadenza, suggerendo un problema significativo in quel periodo specifico. Questo alto tasso di ritardo richiede un'analisi approfondita per identificare le cause e implementare azioni correttive.\\
+Infine, il tasso di completamento anticipato a settembre 2020 è solo del 10\%, indicando che poche attività sono state completate prima delle scadenze.\\
+
+\custombold{On-Time distribution}\\
+Questo grafico rappresenta la distribuzione dei casi in base al loro completamento rispetto alle scadenze, suddivisi per giorni di anticipo o ritardo.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/SecondaSimulazione/on-time-distribution.png}
+    \caption{Grafico di distribuzione dei casi in base al loro completamento rispetto alle scedenze}
+    \label{fig:grafico-on-time-distribution}
+\end{figure}
+\custombold{Assi del grafico}\\
+\begin{itemize}
+    \item \custombold{Asse Y (Cases)}: rappresenta il numero di casi, con un intervallo che va da 0 a 30;
+    \item \custombold{asse X (Timing in days)}: rappresenta i giorni di anticipo o ritardo rispetto alla scadenza. Il lato sinistro dell'asse X indica i giorni di anticipo (early), mentre il lato destro indica i giorni di ritardo (late).
+\end{itemize}
+\custombold{Barre del grafico}
+\begin{itemize}
+    \item \custombold{Barre azzurre}: indicano i casi completati in anticipo;
+    \item \custombold{barre blu scuro}: indicano i casi completati in tempo;
+    \item \custombold{barre grigie}: indicano i casi completati in ritardo.
+\end{itemize}
+\custombold{Analisi e interpretazione}
+Il grafico fornisce una visione dettagliata di come i casi sono distribuiti in relazione al loro completamento anticipato, puntuale o ritardato. Analizzando i dati, emerge che la maggior parte delle attività tende a essere completata in anticipo, con un picco tra i 6 e 8 giorni prima della scadenza, suggerendo una propensione a concludere le attività ben prima del termine previsto.\\
+Inoltre, sono presenti diversi casi completati esattamente in tempo, evidenziati dalle barre blu scuro, che indicano una buona gestione delle scadenze per queste attività.\\
+Infine, un numero minore di attività risulta completato in ritardo, con alcuni casi che si protraggono fino a 6 giorni dopo la scadenza, evidenziando aree in cui è necessario migliorare il rispetto dei tempi previsti.\\
+
+\custombold{Tasso di puntualità attuale e potenziali aree di miglioramento}\\
+Questa schermata fornisce una panoramica del tasso di puntualità attuale e delle potenziali aree di miglioramento.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/SecondaSimulazione/attual-rate-and-improvments.png}
+    \caption{Schermata del tasso di puntualità attuale e di possibili miglioramenti}
+    \label{fig:grafico-attual-rate-improvments}
+\end{figure}
+\custombold{On-Time rate}\\
+\begin{itemize}
+    \item \custombold{On-Time rate}: mostra il tasso di puntualità attuale, che è del 28.5\%;
+    \item \custombold{frecce di incremento}: indicano un possibile miglioramento del tasso di puntualità al 32.7\%;
+    \item \custombold{barra di progresso}: rappresenta visivamente il miglioramento dal tasso attuale al tasso potenziale.
+\end{itemize}
+\custombold{Descrizione dell'impatto}\\
+\begin{itemize}
+    \item \custombold{What is the impact?}: una spiegazione dell'impatto, che indica che concentrarsi su questo driver migliorerà il tasso di puntualità del 4.3\%;
+    \item \custombold{How is this calculated?}: una spiegazione del calcolo, indicando che il driver ha un totale di 22 casi con 19 (86\%) che non soddisfano il comportamento previsto. Affrontando questi casi, si raggiungerà un miglioramento del 33\% per il driver selezionato.
+\end{itemize}
+\custombold{Drivers con maggior potenziale di miglioramento}\\
+La sezione inferiore della schermata elenca i drivers (periodi specifici) che hanno il maggiore potenziale per migliorare la baseline del tasso di puntualità.\\
+\custombold{Analisi e interpretazione}\\
+Questa schermata fornisce una chiara indicazione di dove l'azienda può concentrare gli sforzi per migliorare il tasso di puntualità delle attività. Analizzando i drivers con il maggiore potenziale di miglioramento, le aziende possono identificare i periodi e i casi specifici che contribuiscono maggiormente ai ritardi e pianificare azioni correttive mirate.\\
+\subsubsection{Conclusioni}
+La funzionalità "Are you meeting the deadlines?" di Celonis rappresenta uno strumento potente per il monitoraggio e l'analisi del rispetto delle scadenze nei processi aziendali. Essa permette alle aziende di configurare le scadenze delle attività basandosi su metriche aziendali specifiche e di visualizzare le performance attraverso grafici e tabelle dettagliate. Questa capacità di configurazione precisa è fondamentale per garantire che le scadenze siano realistiche e adeguate alle esigenze operative.\\
+Un vantaggio significativo di questa funzionalità è la sua capacità di fornire un monitoraggio continuo delle prestazioni rispetto alle scadenze. Questo permette alle aziende di reagire tempestivamente ai problemi, identificando le inefficienze. Di conseguenza, le azioni correttive possono essere pianificate e implementate in modo più efficiente, migliorando l'efficienza operativa e riducendo i tempi di ciclo.\\
+La possibilità di segmentare i dati e di approfondire i dettagli delle attività attraverso filtri e funzionalità di drill-down è un altro vantaggio significativo. Questa capacità analitica consente di comprendere le cause radice dei ritardi e di pianificare interventi correttivi mirati, ottimizzando l'utilizzo delle risorse. Le aziende possono analizzare i trend di completamento, identificando se le attività tendono ad essere completate in anticipo, in tempo o in ritardo, e in che misura. Questo livello di dettaglio analitico è fondamentale per migliorare la gestione del tempo e delle risorse.\\
+Tuttavia, ci sono anche alcuni svantaggi da considerare. La configurazione iniziale delle scadenze richiede un'attenzione dettagliata e una comprensione approfondita delle metriche aziendali rilevanti. Se le scadenze non sono impostate correttamente, l'analisi risultante potrebbe essere inaccurata o fuorviante. Inoltre, l'implementazione di azioni correttive basate sui dati richiede un impegno costante da parte dei vari team e dipartimenti, il che può comportare un utilizzo significativo di risorse e tempo. Senza un monitoraggio continuo e un feedback regolare, i miglioramenti potrebbero non essere sostenibili nel lungo termine.
 \end{document}
