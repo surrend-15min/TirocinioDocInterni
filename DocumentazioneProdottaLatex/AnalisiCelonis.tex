@@ -305,6 +305,9 @@ Questa tabella offre una suddivisione dettagliata del tasso di puntualità per m
     \item \custombold{cases(\%)}: percentuale dei casi rispetto al totale analizzato;
     \item \custombold{on-time rate}: percentuale di casi completati entro le scadenze per ogni mese.
 \end{itemize}
+\custombold{Interpretazione della tabella}\\
+La tabella offre una visione chiara della puntualità dei casi analizzati per ogni mese. Permette di identificare i mesi con migliori o peggiori performance in termini di rispetto delle scadenze. Ad esempio, settembre 2019 e febbraio 2020 hanno un on-time rate del 39\%, indicando che in quei mesi una percentuale significativa dei casi è stata completata entro le scadenze.\\
+D'altra parte, mesi come giugno 2019 e dicembre 2020 hanno tassi di puntualità più bassi, rispettivamente del 12\% e del 16\%, segnalando periodi in cui è stato più difficile rispettare le scadenze. Questi dati sono utili per comprendere le variazioni nella performance e per identificare le cause potenziali di ritardi in specifici periodi.\\
 
 \custombold{On-Time behavior}\\
 Il grafico rappresenta il comportamento delle attività in relazione alle scadenze.\\
@@ -409,4 +412,182 @@ La funzionalità "Are you meeting the deadlines?" di Celonis rappresenta uno str
 Un vantaggio significativo di questa funzionalità è la sua capacità di fornire un monitoraggio continuo delle prestazioni rispetto alle scadenze. Questo permette alle aziende di reagire tempestivamente ai problemi, identificando le inefficienze. Di conseguenza, le azioni correttive possono essere pianificate e implementate in modo più efficiente, migliorando l'efficienza operativa e riducendo i tempi di ciclo.\\
 La possibilità di segmentare i dati e di approfondire i dettagli delle attività attraverso filtri e funzionalità di drill-down è un altro vantaggio significativo. Questa capacità analitica consente di comprendere le cause radice dei ritardi e di pianificare interventi correttivi mirati, ottimizzando l'utilizzo delle risorse. Le aziende possono analizzare i trend di completamento, identificando se le attività tendono ad essere completate in anticipo, in tempo o in ritardo, e in che misura. Questo livello di dettaglio analitico è fondamentale per migliorare la gestione del tempo e delle risorse.\\
 Tuttavia, ci sono anche alcuni svantaggi da considerare. La configurazione iniziale delle scadenze richiede un'attenzione dettagliata e una comprensione approfondita delle metriche aziendali rilevanti. Se le scadenze non sono impostate correttamente, l'analisi risultante potrebbe essere inaccurata o fuorviante. Inoltre, l'implementazione di azioni correttive basate sui dati richiede un impegno costante da parte dei vari team e dipartimenti, il che può comportare un utilizzo significativo di risorse e tempo. Senza un monitoraggio continuo e un feedback regolare, i miglioramenti potrebbero non essere sostenibili nel lungo termine.
+
+\subsection{Terza simulazione}
+Il file CSV è stato creato mediante uno script Python che simula una serie di attività relative alla produzione e alla gestione degli ordini di prodotti. Inoltre, per la simulazione dei dati, sono stati presi in considerazione anche i dati estratti manualmente da un database di un sistema gestionale.
+\subsubsection{Regole di simulazione}
+\custombold{Impostazione delle date iniziali}\\
+Ogni ciclo di attività inizia con la prima attività programmata tra il 1 gennaio 2019 e il 31 dicembre 2020.\\
+\custombold{Definizione delle tipologie di prodotti}\\
+Viene creata una lista di 30 tipi di scarpe, denominate "Scarpe tipo 1" fino a "Scarpe tipo 30".\\
+\custombold{Definizione delle attività e delle durate}\\
+Sono state definite 17 attività, ciascuna con un ID unico e una durata variabile. Le durate delle attività sono espresse in minuti o giorni, a seconda dell'attività specifica.\\
+\custombold{Generazione di un ciclo di attività per prodotto}\\
+Per ciascun prodotto, viene generato un ciclo di attività che segue le seguenti regole:
+\begin{itemize}
+    \item \custombold{attività obbligatorie}: alcune attività avvengono in un ordine fisso. Ad esempio, "Conferma ordine" è sempre seguita da "Creazione progetto";
+    \item \custombold{modifica del progetto}: un numero casuale di modifiche al progetto (da 1 a 5) può essere aggiunto dopo la creazione del progetto;
+    \item \custombold{gestione degli ordini fornitore}: un numero casuale (da 1 a 3) di cicli di gestione ordini fornitore può essere inserito, ognuno dei quali può includere attività come "Ordine fornitore", "Arrivo offerta fornitore", "Ordine annullato" o "Ordine sospeso";
+    \item \custombold{produzione}: vengono aggiunte attività relative alla produzione, come "Stampa scheda di produzione", "Inizio ciclo di produzione" e "Termine ordine di produzione";
+    \item \custombold{attività non necessarie}: possono essere inserite attività opzionali come "Controllo qualità non necessario" (20\% di probabilità) e "Ri-lavorazione non necessaria" (10\% di probabilità);
+    \item \custombold{consegna}: dopo la produzione, viene aggiunta l'attività di "Consegna".
+\end{itemize}
+\custombold{Generazione dei timestamp}\\
+Ogni attività riceve un timestamp generato casualmente basato su un intervallo di tempo definito per quella specifica attività.\\
+\custombold{Ciclo di generazione dei dati}\\
+Il numero di prodotti varia tra 300 e 500, determinato casualmente. Per ogni prodotto, viene generato un ciclo di attività completo, assicurandosi che tutte le attività obbligatorie siano inserite nel corretto ordine e che le attività casuali siano distribuite come specificato.
+\custombold{Mischiamento casuale delle righe del file CSV}\\
+È stato utilizzato un algoritmo per mischiare in modo casuale le righe del file CSV. L'algoritmo legge il file CSV originale e separa l'intestazione dai dati. Successivamente, le righe dei dati vengono mescolate casualmente mantenendo intatta l'intestazione. Infine, il nuovo file CSV, con le righe mescolate, viene salvato in un file di output. Questo processo assicura che i dati siano riorganizzati in modo casuale senza alterare la struttura del file CSV.
+
+\subsubsection{Analisi delle attività non desiderate}
+La funzionalità di analisi delle attività non desiderate di Celonis è uno strumento utile per identificare e analizzare le attività indesiderate all'interno di un processo aziendale. Questa esplorazione aiuta le aziende a individuare le inefficienze e i passaggi non necessari che possono essere eliminati o ottimizzati.\\
+\custombold{Configurazione}\\
+Questa sezione invita l'utente a selezionare le attività che non dovrebbero verificarsi nel processo. Le attività indesiderate possono includere blocchi, modifiche o altre attività che rallentano il processo o lo rendono inefficiente.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/TerzaSimulazione/unwanted-activities-configuration.png}
+    \caption{Schermata di configurazione dell'analisi delle attività indesiderate}
+    \label{fig:configurazione-unwanted-activities}
+\end{figure}
+\custombold{Campo di selezione}\\
+\begin{itemize}
+    \item \custombold{Unwanted activities}: un menu a tendina che permette di selezionare le attività specifiche che si considerano indesiderate. Selezionando un'attività dal menu, è possibile investigare dove e perché queste attività si verificano nel processo.
+\end{itemize}
+
+\custombold{Unwanted activity rate}\\
+Questa schermata fornisce informazioni chiave sul tasso di attività indesiderate e il loro impatto sui tempi di ciclo del processo.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/TerzaSimulazione/unwanted-activity-rate.png}
+    \caption{Schermata di monitoraggio del tasso di attività indesiderate}
+    \label{fig:schermata-unwanted-activity-rate}
+\end{figure}
+\custombold{Dettagli delle attività indesiderate}\\
+In questo caso le attività indesiderate selezionate si sono verificate in 91 casi su 303 totali, pari al 29.9\% del totale analizzato. In media, queste attività si sono verificate 0.32 volte per caso.\\
+\custombold{Indicatori di performance collegati}\\
+\begin{itemize}
+    \item \custombold{Total throughput time}: il tempo totale di completamento del processo senza considerare le attività indesiderate, che è di 40 giorni;
+    \item \custombold{TPT with activities}: il tempo totale di completamento del processo considerando le attività indesiderate, che è di 42 giorni, suggerendo che la presenza di attività indesiderate aggiunge 2 giorni al tempo totale di completamento del processo.
+\end{itemize}
+\custombold{Analisi e interpretazione}\\
+Questa schermata offre una visione chiara dell'impatto delle attività indesiderate sui processi aziendali. Il tasso di attività indesiderate del 29.9\% indica che queste attività si verificano con una certa frequenza, influenzando negativamente l'efficienza del processo. La diminuzione del tasso di attività indesiderate di 0.18 punti percentuali è un segnale positivo di miglioramento.\\
+Il confronto tra il "Total Throughput Time" (40 giorni) e il "TPT with activities" (42 giorni) evidenzia che le attività indesiderate aumentano il tempo di completamento del processo di 2 giorni.\\
+
+\custombold{Activity frequency}\\
+Il grafico mostra quante volte ciascuna attività indesiderata si è verificata.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/TerzaSimulazione/activity-frequency.png}
+    \caption{Grafico della frequenza delle attività indesiderate}
+    \label{fig:grafico-activity-frequency}
+\end{figure}
+\custombold{Barre del grafico}\\
+Il grafico è costituito da due barre, ciascuna rappresentante una diversa attività indesiderata:
+\begin{itemize}
+    \item \custombold{barra superiore}: rappresenta la frequenza con cui si verifica l'attività "Controllo qualità non necessario";
+    \item \custombold{barra inferiore}: rappresenta la frequenza con cui si verifica l'attività "Ri-lavorazione non necessaria".
+\end{itemize}
+\custombold{Dati specifici}\\
+\begin{itemize}
+    \item \custombold{Controllo qualità non necessario}: questa attività si è verificata circa 60 volte, indicando che il controllo qualità è stato eseguito in situazioni dove non era richiesto;
+    \item \custombold{Ri-lavorazione non necessaria}: questa attività si è verificata circa 30 volte, mostrando che la ri-lavorazione è stata eseguita più frequentemente del necessario.
+\end{itemize}
+\custombold{Interpretazione del grafico}\\
+Il grafico offre una rappresentazione chiara e sintetica della frequenza delle attività indesiderate all'interno del processo. La sua suddivisione in due sezioni permette di comprendere rapidamente quale attività si verifica più frequentemente e con quale frequenza.\\
+Un elemento significativo emerso dall'analisi è l'elevata frequenza del "Controllo qualità non necessario", con circa 60 occorrenze. Questo dato suggerisce che c'è un problema rilevante legato all'esecuzione di controlli qualità non necessari, che potrebbero essere eliminati o ridotti per migliorare l'efficienza del processo.\\
+La "Ri-lavorazione non necessaria" si verifica meno frequentemente, con circa 30 occorrenze, ma rappresenta comunque un'opportunità per ottimizzare il processo. Ridurre la necessità di ri-lavorazione potrebbe migliorare il flusso di lavoro e ridurre i tempi di ciclo complessivi.\\
+
+\custombold{Occurrence per case affected}\\
+Il grafico mostra quante volte le attività indesiderate si verificano in media per caso.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/TerzaSimulazione/occurrence-per-case-affected.png}
+    \caption{Grafico della frequenza delle occorrenze per caso influenzato nel processo}
+    \label{fig:grafico-occurrence-per-case-affected}
+\end{figure}
+\custombold{Barre del grafico}\\
+Il grafico è costituito da due barre di colori diversi, ciascuna rappresentante una diversa occorrenza per caso influenzato:
+\begin{itemize}
+    \item \custombold{barra blu}: rappresenta il numero di casi in cui le attività indesiderate si sono verificate una volta per caso;
+    \item \custombold{barra grigia}: rappresenta il numero di casi in cui le attività indesiderate si sono verificate due volte per caso.
+\end{itemize}
+\custombold{Dati specifici}\\
+\begin{itemize}
+    \item \custombold{Occorrenza singola}: la barra blu mostra che 86 casi hanno avuto un'attività indesiderata verificata una sola volta;
+    \item \custombold{occorrenza doppia}: la barra grigia mostra che ci sono 5 casi in cui le attività indesiderate si sono verificate due volte per caso.
+\end{itemize}
+\custombold{Interpretazione del grafico}\\
+Il grafico offre una rappresentazione chiara e sintetica della frequenza con cui le attività indesiderate si verificano per caso. La sua suddivisione in due sezioni permette di comprendere rapidamente quanti casi sono stati influenzati dalle attività indesiderate e con quale frequenza.\\
+Un elemento significativo emerso dall'analisi è che la maggior parte dei casi influenzati dalle attività indesiderate ha subito tali attività una sola volta per caso. Questo suggerisce che, sebbene le attività indesiderate siano presenti, tendono a non ripetersi frequentemente nello stesso caso.\\
+
+\custombold{Unwanted activities per case over time}\\
+Il grafico mostra il numero di casi totali e i casi con attività indesiderate per ciascun mese.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/TerzaSimulazione/unwanted-activities-per-case-over-time.png}
+    \caption{Grafico della frequenza delle attività indesiderate per caso nel tempo}
+    \label{fig:grafico-unwanted-activities-per-case-over-time}
+\end{figure}
+\custombold{Barre del grafico}\\
+Il grafico è costituito da due tipi di barre colorate, ciascuna rappresentante una diversa categoria di casi:\\
+\begin{itemize}
+    \item \custombold{barre azzurre}: rappresentano il numero totale di casi per ogni mese;
+    \item \custombold{barre blu}: rappresentano il numero di casi che includono attività indesiderate per ogni mese.
+\end{itemize}
+\custombold{Dati specifici}\\
+\begin{itemize}
+    \item \custombold{Numero totale di casi}: le barre azzurre mostrano il numero totale di casi iniziati ogni mese, che varia tra circa 10 e 15 casi al mese;
+    \item \custombold{casi con attività indesiderate}: le barre blu mostrano il numero di casi con attività indesiderate, che varia tra circa 2 e 7 casi al mese.
+\end{itemize}
+\custombold{Interpretazione del grafico}\\
+Il grafico offre una rappresentazione chiara e sintetica della frequenza delle attività indesiderate per caso nel tempo. La sua suddivisione in due categorie di barre permette di comprendere rapidamente la proporzione di casi totali che includono attività indesiderate in ciascun mese.\\
+Un elemento significativo emerso dall'analisi è che, sebbene il numero totale di casi per mese rimanga relativamente costante, la proporzione di casi con attività indesiderate varia. Ad esempio, nei mesi di luglio 2019 e aprile 2020, si osserva un numero relativamente alto di casi totali e anche un numero significativo di casi con attività indesiderate. Questo potrebbe indicare periodi specifici in cui le inefficienze del processo erano più prevalenti.\\
+
+\custombold{Unwanted activities rate breakdown}\\
+Questa tabella offre una suddivisione dettagliata del tasso di attività indesiderate per mese di inizio dei casi analizzati.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/TerzaSimulazione/unwanted-activities-rate-breakdown.png}
+    \caption{Tabella del tasso di attività indesiderate per mese di inizio}
+    \label{fig:tabella-unwanted-activities-rate-breakdown}
+\end{figure}
+\custombold{Intestazione delle colonne}\\
+\begin{itemize}
+    \item \custombold{Case start month}: il mese di inizio dei casi analizzati;
+    \item \custombold{Number of cases}: il numero di casi iniziati in quel mese specifico;
+    \item \custombold{Cases with unwanted activity}: il numero di casi che includono attività indesiderate;
+    \item \custombold{Unwanted activity rate}: la percentuale di casi con attività indesiderate rispetto al totale dei casi per quel mese;
+    \item \custombold{Occurrences (per case affected)}: il numero medio di occorrenze di attività indesiderate per ciascun caso influenzato.
+\end{itemize}
+\custombold{Interpretazione della tabella}\\
+La tabella offre una visione dettagliata di come le attività indesiderate influenzano i processi nei diversi mesi. Permette di identificare i periodi con la maggiore incidenza di attività indesiderate, evidenziando i mesi in cui l'efficienza del processo è più compromessa.\\
+
+\custombold{Tasso di attività indesiderate attuale e potenziali aree di miglioramento}\\
+Questa schermata fornisce una panoramica del tasso di attività indesiderate attuale e delle potenziali aree di miglioramento.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/TerzaSimulazione/unwanted-rate-and-improvments.png}
+    \caption{Schermata del tasso di attività indesiderate e dei potenziali miglioramenti}
+    \label{fig:schermata-unwanted-rate-and-improvments}
+\end{figure}
+\custombold{Unwanted activity rate}\\
+\begin{itemize}
+    \item \custombold{Unwanted activity rate}: mostra il tasso di attività indesiderate attuale, che è del 29.9\%;
+    \item \custombold{frecce di decremento}: indicano un possibile miglioramento del tasso di attività indesiderate al 27.6\%;
+    \item \custombold{barra di progresso}: rappresenta visivamente il miglioramento dal tasso attuale al tasso potenziale;
+\end{itemize}
+\custombold{Descrizione dell'impatto}\\
+\begin{itemize}
+    \item \custombold{What is the impact?}: una spiegazione dell'impatto, che indica che concentrarsi su questo driver migliorerà il tasso di attività indesiderate del 2.3\%;
+    \item \custombold{How is this calculated?}: una spiegazione del calcolo, indicando che il driver ha un totale di 15 casi con 8 (53\%) che non soddisfano il comportamento previsto. Affrontando questi casi, si raggiungerà un miglioramento del 28\% per il driver selezionato;
+\end{itemize}
+\custombold{Drivers con maggior potenziale di miglioramento}\\
+La sezione inferiore della schermata elenca i drivers (periodi specifici) che hanno il maggiore potenziale per migliorare la baseline del tasso di attività indesiderate.\\
+\custombold{Analisi e interpetazione}\\
+Questa schermata fornisce una chiara indicazione di dove l'azienda può concentrare gli sforzi per migliorare il tasso di attività indesiderate. Analizzando i drivers con il maggiore potenziale di miglioramento, le aziende possono identificare i periodi e i casi specifici che contribuiscono maggiormente alle attività indesiderate e pianificare azioni correttive mirate.\\
+Concentrarsi sui mesi con i maggiori potenziali di miglioramento, come gennaio 2019 e agosto 2020, dove si possono migliorare i tassi di attività indesiderate del 2.3\%, permette di implementare strategie mirate per ridurre significativamente le inefficienze.\\
+\subsubsection{Conclusioni}
+La funzionalità di analisi delle attività non desiderate di Celonis rappresenta uno strumento prezioso per le aziende che desiderano ottimizzare i loro processi aziendali eliminando inefficienze e passaggi non necessari. Attraverso la configurazione personalizzata, gli utenti possono identificare attività specifiche che rallentano il processo, come blocchi o modifiche inutili. I dati raccolti mostrano che le attività indesiderate influenzano negativamente il ciclo del processo, aumentando il tempo di completamento da 40 a 42 giorni. Questo impatto è ulteriormente evidenziato dall'analisi della frequenza delle attività indesiderate, che rivela come il "Controllo qualità non necessario" si verifichi circa 60 volte e la "Ri-lavorazione non necessaria" circa 30 volte.\\
+La distribuzione delle occorrenze per caso dimostra che, sebbene queste attività tendano a non ripetersi frequentemente nello stesso caso, la loro presenza sporadica è comunque significativa. La variazione mensile dei casi totali e dei casi con attività indesiderate indica periodi specifici in cui le inefficienze sono più pronunciate, suggerendo la necessità di interventi mirati in quei periodi. La tabella del tasso di attività indesiderate fornisce una visione dettagliata delle incidenze mensili, facilitando l'identificazione dei mesi con la maggiore incidenza di attività indesiderate.\\
+Infine, la schermata che illustra il tasso di attività indesiderate e le potenziali aree di miglioramento offre una panoramica chiara delle opportunità di ottimizzazione. Con un tasso attuale del 29.9\%, la possibilità di miglioramento fino al 27.6\% rappresenta un obiettivo concreto per le aziende. Concentrarsi sui periodi con il maggior potenziale di miglioramento permette di pianificare azioni correttive mirate, riducendo significativamente le inefficienze e migliorando l'efficienza complessiva del processo aziendale.
 \end{document}
