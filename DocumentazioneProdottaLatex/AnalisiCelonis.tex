@@ -79,6 +79,29 @@ Celonis supporta anche l'integrazione con tecniche di machine learning e intelli
 
 Inoltre, Celonis offre funzionalità di automazione dei processi, che permettono di implementare rapidamente miglioramenti identificati attraverso il process mining. Questo porta a una riduzione dei tempi di ciclo, a una maggiore conformità e a un miglioramento generale dell'efficienza operativa.
 
+\section{Oracle EBS O2C Extractor Tool}
+\subsection{Introduzione}
+L'Oracolo EBS O2C Extractor Tool fornito da Celonis è uno strumento progettato per facilitare l'estrazione di dati da un database Oracle E-Business Suite (EBS).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/oracle-EBS-extractor.png}
+    \caption{Schermata principale dell'estrattore dati}
+    \label{fig:chermata-principale-extractor}
+\end{figure}
+\subsection{Funzionamento}
+\subsubsection{Connessione al database}
+Gli utenti devono fornire le informazioni di connessione al database, come il nome del server, la porta del server, l'ID del sistema Oracle (SID), il nome utente e la password.\\
+È possibile specificare la cartella di destinazione per il salvataggio dei dati estratti e scegliere se sovrascrivere i file esistenti.
+\subsubsection{Selezione delle tabelle da estrarre}
+Una lista delle tabelle da estrarre può essere importata direttamente o inserita manualmente nell'interfaccia. La lista include il nome della tabella e i criteri di selezione dei dati (es. date di creazione).
+\subsubsection{Estrazione dei dati}
+Dopo aver configurato i dettagli di connessione e selezionato le tabelle, l'utente può avviare l'estrazione dei dati premendo il pulsante "Extract Data".\\
+La sezione "Status" nell'interfaccia fornisce aggiornamenti in tempo reale sullo stato del processo di estrazione.
+\subsection{Pregi e difetti}
+Uno dei principali vantaggi dell'Oracolo EBS O2C Extractor Tool di Celonis è la sua interfaccia utente intuitiva. L'interfaccia è semplice e facile da navigare, con campi chiari per l'inserimento delle informazioni di connessione e per la selezione delle tabelle. Inoltre gli utenti possono importare una lista di tabelle predefinita o inserire manualmente le tabelle da estrarre, permettendo una maggiore personalizzazione e controllo sull'estrazione dei dati.\\
+Un altro aspetto positivo è la capacità di automatizzare una parte significativa del processo di estrazione e gestione dei dati. La possibilità di salvare i dati estratti direttamente in una cartella specificata semplifica ulteriormente il workflow, riducendo la necessità di interventi manuali successivi. Inoltre, l'estrattore è in grado di suddividere i dati estratti in file da massimo 1 GB, permettendo così il caricamento su Celonis senza superare il limite imposto dalla piattaforma. Questo rappresenta un significativo vantaggio per le aziende che lavorano con grandi volumi di dati, rendendo il processo di caricamento più gestibile e fluido.\\
+Tuttavia, ci sono alcuni difetti da considerare. Innanzitutto, la necessità di inserire manualmente i dettagli di connessione e le tabelle da estrarre può essere soggetta ad errori umani e potrebbe risultare meno efficiente rispetto a metodi completamente automatizzati. Un ulteriore limite è rappresentato dalla gestione degli errori durante il processo di estrazione, che potrebbe essere migliorata con messaggi di errore più dettagliati e suggerimenti per la risoluzione dei problemi.\\
+Infine, un difetto significativo è che, per aggiornare i dati caricati su Celonis, è necessario estrarre nuovamente i dati con questo estrattore. Questo processo potrebbe risultare tedioso e inefficiente, soprattutto se confrontato con l'utilizzo di connettori che permettono l'aggiornamento automatico dei dati sulla piattaforma, migliorando così l'efficienza complessiva.
 
 \section{Integrazione dei dati}
 I dati che la piattaforma Celonis utilizza sono catturati dagli strumenti e dai sistemi aziendali (definiti come sistemi sorgente). Questi sistemi sorgente possono essere integrati con la piattaforma Celonis, permettendo di estrarre i dati rilevanti, trasformarli secondo le esigenze e di caricarli in un modello di dati per essere utilizzati in tutta la piattaforma.
