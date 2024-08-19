@@ -613,4 +613,171 @@ Concentrarsi sui mesi con i maggiori potenziali di miglioramento, come gennaio 2
 La funzionalità di analisi delle attività non desiderate di Celonis rappresenta uno strumento prezioso per le aziende che desiderano ottimizzare i loro processi aziendali eliminando inefficienze e passaggi non necessari. Attraverso la configurazione personalizzata, gli utenti possono identificare attività specifiche che rallentano il processo, come blocchi o modifiche inutili. I dati raccolti mostrano che le attività indesiderate influenzano negativamente il ciclo del processo, aumentando il tempo di completamento da 40 a 42 giorni. Questo impatto è ulteriormente evidenziato dall'analisi della frequenza delle attività indesiderate, che rivela come il "Controllo qualità non necessario" si verifichi circa 60 volte e la "Ri-lavorazione non necessaria" circa 30 volte.\\
 La distribuzione delle occorrenze per caso dimostra che, sebbene queste attività tendano a non ripetersi frequentemente nello stesso caso, la loro presenza sporadica è comunque significativa. La variazione mensile dei casi totali e dei casi con attività indesiderate indica periodi specifici in cui le inefficienze sono più pronunciate, suggerendo la necessità di interventi mirati in quei periodi. La tabella del tasso di attività indesiderate fornisce una visione dettagliata delle incidenze mensili, facilitando l'identificazione dei mesi con la maggiore incidenza di attività indesiderate.\\
 Infine, la schermata che illustra il tasso di attività indesiderate e le potenziali aree di miglioramento offre una panoramica chiara delle opportunità di ottimizzazione. Con un tasso attuale del 29.9\%, la possibilità di miglioramento fino al 27.6\% rappresenta un obiettivo concreto per le aziende. Concentrarsi sui periodi con il maggior potenziale di miglioramento permette di pianificare azioni correttive mirate, riducendo significativamente le inefficienze e migliorando l'efficienza complessiva del processo aziendale.
+
+\section{Implementazioni pratiche di Business Miner: dati reali}
+\subsection{Struttura dei dati}
+Per testare le funzionalità del Business Miner di Celonis, è stata scelta una tabella del database ERP di un'azienda produttrice di porte. Nello specifico, si è deciso di utilizzare la tabella che registra i movimenti di magazzino, poiché ogni movimento rappresenta un'attività nel processo di produzione. Inoltre, questa tabella è ricca di dati, offrendo così un'ampia base di informazioni per l'analisi.\\
+Le colonne della tabella sono le seguenti:
+\begin{itemize}
+    \item \custombold{NRO\_REGISTRAZIONE}: numero di registrazione del movimento di magazzino;
+    \item \custombold{DATA\_MOVIMENTO}: data di creazione del movimento di magazzino;
+    \item \custombold{COD\_CAUSALE}: codice di riferimento della causale del movimento di magazzino;
+    \item \custombold{MASTRO}: codice mastro del cliente o del fornitore del movimento;
+    \item \custombold{PARTITARIO}: codice partitario del cliente o del fornitore del movimento;
+    \item \custombold{NRO\_DOCUMENTO}: indica il numero del documento che ha originato il movimento;
+    \item \custombold{DATA\_DOCUMENTO}: indica la data del documento che ha orignato il movimento;
+    \item \custombold{NRO\_REGIST\_MOV\_ABB}: numero registrazione del movimento abbinato;
+    \item \custombold{COD\_MAGAZZINO}: codice del magazzino da proporre a livello di riga;
+    \item \custombold{COD\_VALUTA}: valuta alla quale è stato eventualmente valorizzato il movimento;
+    \item \custombold{CAMBIO}: valore del cambio del movimento;
+    \item \custombold{MASTRO\_AGENTE}: mastro agente collegato al movimento;
+    \item \custombold{NRO\_ORDINE}: riferimento all`ordine nel movimento;
+    \item \custombold{NRO\_RIF\_CONTAB\_FATTURA}: numero di riga della registrazione del movimento contabile della fattura legato al documento che ha generato il movimento di magazzino;
+    \item \custombold{RIGA\_RIF\_CONTAB\_FATTURA}: riga della registrazione contabile della fattura a cui il movimento di magazzino si riferisce;
+    \item \custombold{RIF\_LOTTO}: non utilizzato;
+    \item \custombold{NRO\_FT}: acquisti: numero della fattura attribuito dal fornitore; vendite: Sez/Nro fattura;
+    \item \custombold{DATA\_FT}: acquisti: data della fattura attribuita dal fornitore; vendite: data fattura;
+    \item \custombold{RIF\_ANNO\_DOC}: questo attributo e i seguenti contengono gli estremi del documento che ha generato il documento di magazzino;
+    \item \custombold{RIF\_TIPO\_DOC}
+    \item \custombold{RIF\_NRO\_DOC}
+    \item \custombold{AMBITO\_RIF\_DOC}: questo attributo definisce se il movimento di magazzino e stato inserito manualmente oppure se e stato generato da un documento di vendita o di acquisto;
+    \item \custombold{DATA\_COMP}: data di competenza della registrazione.
+    \item \custombold{RIF\_MOV\_MAG\_SCAR\_COMP}: riferimento all'eventuale movimento di scarico componenti;
+    \item \custombold{ALTRI\_RIF\_TEST}: campo descrittivo a disposizione dell'utente;
+    \item \custombold{TXT\_A\_DISP\_1}: testo a disposizione 1;
+    \item \custombold{TXT\_A\_DISP\_2}: testo a disposizione 2;
+    \item \custombold{TXT\_A\_DISP\_3}: testo a disposizione 3;
+    \item \custombold{DATA\_A\_DISP\_1}: data  a disposizione 1;
+    \item \custombold{DATA\_A\_DISP\_2}: data  a disposizione 2;
+\end{itemize}
+Inoltre, è stata associata a questa tabella un'altra tabella contenente le informazioni sulle causali di magazzino, necessarie per etichettare i dati della prima tabella rendendoli più facilmente leggibili. La struttura della tabella delle causali di magazzino è la seguente:
+\begin{itemize}
+    \item \custombold{COD\_CAUSALE}: codice causale;
+    \item \custombold{DESCRIZIONE}: descrizione;
+    \item \custombold{MAGAZZ\_DEFAULT}: indica il magazzino da proporre come default per i movimenti di magazzino che appartengono alla causale;
+    \item \custombold{MAGAZZ\_COLL\_DEFAULT}: indica il magazzino collegato da proporre come default per i movimenti di magazzino che appartengono alla causale;
+    \item \custombold{SE\_REG\_FISCALE}: indica se il movimento deve essere stampato nel registro fiscale o meno;
+    \item \custombold{SE\_QUANTITA}: indica se la valorizzazione della quantita e obbligatoria con il programma di gestione movimenti di magazzino (Y/N);
+    \item \custombold{SE\_PREZZO}: indica se la valorizzazione di prezzo e valore e obbligatoria con il programma di gestione movimenti di magazzino (Y/N);
+    \item \custombold{SE\_SCONTO}: indica se la valorizzazione dello sconto e obbligatoria con il programma di gestione movimenti di magazzino (Y/N);
+    \item \custombold{COD\_CAUSALE\_ULT\_PREZZO}: indica il tipo di prezzo di movimento proposto come default dal programma di gestione movimenti (prezzo medio, ultimo prezzo di carico, ...);
+    \item \custombold{COD\_CAUSALE\_DB}: collegamento tra magazzino e produzione;
+    \item \custombold{INPUT\_CLI\_FORN\_TUTTI}: indica per quali conti è valida la causale se per clienti, fornitori o tutti;
+    \item \custombold{COD\_TIPO\_RIEPILOGO}: questo attributo indica se il movimento è di Esistenza iniziale, di Carico o di Scarico;
+    \item \custombold{EVEN\_COD\_CAUSALE\_ABB}: nel caso sia presente la causale abbinata significa che la causale di movimentazione prevede un movimento abbinato;
+    \item \custombold{ART\_DIV\_SU\_CAUS\_ABB}: indica che l`articolo movimentato dalla causale abbinata e diverso dall`articolo movimentato dalla causale corrente;
+    \item \custombold{SE\_VALIDO\_PER\_PREZ\_MED}: includere o meno il movimento nel calcolo del prezzo medio dell`articolo;
+    \item \custombold{AGG\_DATI\_FORNITORE}: Non gestito;
+    \item \custombold{SE\_DA\_FATT}: indica se il documento di vendita corrispondente al movimento e da fatturare o meno;
+    \item \custombold{INTRA\_COD\_TRANSAZIONE}: codice transazione (per intrastat);
+    \item \custombold{SE\_GEST\_LOTTI}: indica se è prevista la gestione a lotti;
+    \item \custombold{SE\_NON\_MOV\_MAG}: indica se il magazzino deve essere o meno movimentato;
+    \item \custombold{TIPO\_ART\_ABIT}: tipo articolo abituale per movimenti manuali;
+    \item \custombold{PROP\_ULT\_PZZO}: tipo proposta;
+    \item \custombold{SE\_ANALITICA}: indica se la valorizzazione dei riferimenti contabilita analitica (voce di spesa, centro di costo e commessa) è obbligatoria con il programma di gestione movimenti di magazzino (Y/N);
+    \item \custombold{TIPO\_COSTO\_ULT\_PREZZO}: tipo costo per prezzo di default;
+    \item \custombold{SE\_VALIDO\_PER\_PREZ\_PRJ}: includere o meno il movimento nel calcolo del prezzo medio di progetto;
+    \item \custombold{COD\_CAUS\_MOV\_PRJ}: causale di movimentazione della contabilita di progetto;
+    \item \custombold{SE\_VAL\_MOV\_DOCUMENTO}: indica se il movimento di magazzino generato da documento deve essere valorizzato (Y/N);
+    \item \custombold{SE\_PRZ\_MEDIO\_NO\_VAL}: indica se il movimento di magazzino viene considerato per il calcolo del prezzo medio anche se privo di valore (Y/N).
+\end{itemize}
+\subsection{Process AI}
+Questa funzionalità permette alle organizzazioni di modellare, analizzare e ottimizzare i processi aziendali attraverso algoritmi di intelligenza artificiale. Integrando una comprensione dettagliata dei flussi di lavoro, Process AI non solo individua inefficienze e colli di bottiglia, ma suggerisce anche azioni correttive basate su dati in tempo reale, migliorando così l'efficacia e l'efficienza operativa complessiva. In questo modo, le aziende possono ottenere una visione più chiara dei loro processi end-to-end e prendere decisioni informate per migliorare le performance a lungo termine.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/DatiReali/ProcessAI.png}
+    \caption{Schermata di Process AI}
+    \label{fig:schermata-Process-AI}
+\end{figure}
+
+Nella parte centrale, viene evidenziato il "Most Common Path", ovvero il percorso più comune attraversato dai casi. Qui, vediamo che la maggior parte dei casi, precisamente 1.948.941, inizia con l'azione di "Carico da produzione", seguita dal "Scarico componenti", con un numero di casi leggermente superiore, pari a 1.966.784. Questo suggerisce una leggera differenza che potrebbe indicare che alcuni casi vengono aggiunti o ripresi durante il processo. Questa rappresentazione del percorso comune è estremamente utile perché fornisce una chiara idea del flusso operativo tipico, permettendo di individuare con facilità eventuali deviazioni o anomalie rispetto a questo schema di riferimento.\\
+Accanto a questa rappresentazione, vengono mostrati gli indicatori chiave di prestazione (KPIs) relativi al percorso più comune. Notiamo che sono stati analizzati 829.278 casi, che hanno generato un totale di 3.317.112 attività. Questi numeri offrono un quadro d'insieme della portata del processo, mostrando quanto sia complesso e quante operazioni vengano eseguite. Tuttavia, la mera aggregazione di questi dati potrebbe non fornire una visione completa delle dinamiche specifiche, come la distribuzione delle attività per ciascun caso, il che limita leggermente la profondità dell'analisi.\\
+Un aspetto cruciale della schermata è rappresentato dalla sezione dedicata alle deviazioni rilevate. Qui, Celonis identifica e mostra le principali deviazioni rispetto al percorso più comune. Ad esempio, notiamo che la deviazione "Trasferimento interno (sca)" è presente nel 5\% dei casi, coinvolgendo 96.628 istanze. Un altro esempio è la deviazione "Acquisto", che appare in meno dell'1\% dei casi. Questi dati sono fondamentali perché consentono agli analisti di focalizzare l'attenzione sulle aree problematiche o atipiche del processo. Tuttavia, la schermata si limita a mostrare il numero di casi e l'impatto quantitativo delle deviazioni senza fornire una spiegazione dettagliata delle possibili ragioni o del contesto in cui queste deviazioni si verificano, il che può rendere meno immediata la comprensione delle cause sottostanti.\\
+Un elemento interessante è l'indicazione delle possibili cause radici per una delle deviazioni, come "Trasferimento interno (sca)", associata a un codice causale specifico, il "015". Questo è un dettaglio operativo importante, che può indirizzare ulteriori indagini.\\
+In generale, la schermata di Process AI di Celonis è ben progettata per fornire una panoramica sintetica e immediata del processo aziendale e delle sue deviazioni. Offre strumenti utili per identificare rapidamente problemi potenziali, ma potrebbe beneficiare di una maggiore profondità e contesto, soprattutto per quanto riguarda l'interpretazione delle deviazioni e delle cause radici. La chiarezza visiva è un punto di forza, ma potrebbe mascherare complessità che richiedono un'analisi più approfondita per essere comprese appieno.
+
+\subsection{Process Overview}
+Questa funzionalità aggrega dati provenienti da diverse fonti, mostrando come i processi si sviluppano realmente, identificando eventuali deviazioni, inefficienze e aree di miglioramento. Con Process Overview, le aziende possono esplorare i dettagli dei loro processi, rilevando rapidamente i punti critici e le opportunità di ottimizzazione, il tutto in un’interfaccia grafica interattiva che semplifica la navigazione e l'interpretazione dei dati.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/DatiReali/ProcessOverview1.png}
+    \caption{Schermata di Process Overview}
+    \label{fig:schermata-Process-Overview}
+\end{figure}
+
+La prima sezione fornisce una serie di metriche chiave che aiutano a capire il funzionamento quotidiano del processo analizzato. Vediamo innanzitutto che ci sono, in media, 944 casi al giorno, con un totale di 5.161 eventi che si verificano quotidianamente. Questi numeri indicano un processo molto attivo, in cui ogni caso comporta diverse attività prima di essere completato.\\
+Il tempo di attraversamento medio del processo è di 2 giorni, che rappresenta il tempo impiegato, in media, per passare dal punto iniziale al punto finale del processo. Questo dato è fondamentale per valutare l'efficienza del processo e serve come benchmark per identificare aree dove è possibile ridurre i tempi e migliorare la produttività.\\
+Nella parte inferiore, è presente un grafico che mostra l'andamento giornaliero dei casi su base mensile. Questa visualizzazione è utile per rilevare tendenze o variazioni significative nel tempo, che potrebbero essere dovute a fattori stagionali, cambiamenti operativi o altre dinamiche aziendali. La variabilità osservata nel numero di casi mensili suggerisce che il processo non è statico, ma risponde a una serie di influenze esterne o interne.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/DatiReali/ProcessOverview2.png}
+    \caption{Schermata di Process Overview}
+    \label{fig:schermata-Process-Overview}
+\end{figure}
+
+Celonis ha identificato un Happy Path teorico che inizia con "Carico da produzione" e termina con "Scarico componenti". Tuttavia, ciò che colpisce maggiormente è che, nonostante la definizione di questo percorso ottimale, nessun caso tra i 2.003.134 analizzati segue esattamente questo flusso, come evidenziato dallo 0\% di casi che fluiscono attraverso l'Happy Path.\\
+Questa mancanza di aderenza all'Happy Path teorico indica che il processo reale è molto più complesso e soggetto a deviazioni rispetto a quanto previsto dall'algoritmo. Nonostante il tempo di attraversamento ideale per l'Happy Path sia stimato in 2 giorni, il fatto che nessun caso lo segua rende questo dato puramente teorico e poco applicabile alla realtà operativa.\\
+La sezione inferiore elenca le altre attività frequenti che, pur non facendo parte del percorso ottimale, si verificano spesso nel processo. Tra queste attività troviamo "Trasferimento interno (car)" e "Spedizione", insieme ad altre operazioni come "Vendita" e "Ripristino". La frequenza con cui queste attività compaiono suggerisce che ci sono molti punti di deviazione dal percorso ideale, spesso dovuti a complessità o varianti operative che non sono state catturate nella definizione dell'Happy Path.\\
+La combinazione delle due sezioni ci fornisce un quadro completo del processo. Da un lato, la Process Overview ci offre una comprensione dettagliata dell'attività quotidiana e della performance complessiva del processo. Dall'altro, la sezione Happy Path mette in luce un’importante discrepanza tra il percorso ideale definito e la realtà operativa, evidenziando che nessun caso segue il flusso ottimale. Questo contrasto tra teoria e pratica rappresenta sia una sfida che un'opportunità: una sfida, perché indica che il processo reale è più complesso di quanto inizialmente previsto, ma anche un'opportunità, perché invita a indagare più a fondo le cause di queste deviazioni e a cercare soluzioni per avvicinare la realtà al percorso ideale. In questo modo, gli analisti possono individuare aree di miglioramento e potenzialmente ridefinire l'Happy Path per riflettere meglio le dinamiche operative reali.
+
+\subsection{Process Throughput Times}
+Questa funzionalità consente alle organizzazioni di misurare con precisione l'efficienza temporale dei loro processi, individuando eventuali ritardi o colli di bottiglia che possono rallentare il flusso di lavoro complessivo. Grazie a un'analisi approfondita dei tempi di attraversamento, le aziende possono identificare rapidamente le aree in cui è possibile intervenire per ridurre i tempi di ciclo e migliorare la velocità operativa.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/DatiReali/ProcessThroughputTimes1.png}
+    \caption{Schermata di Throughput Times}
+    \label{fig:schermata-Throughput-Times}
+\end{figure}
+Questa sezione mette in evidenza il tempo medio di attraversamento del processo, calcolato in 11 giorni dall'inizio alla fine del processo. È un dato importante, poiché consente di capire quanto tempo impiega, in media, un caso a completare tutte le fasi del processo. Il grafico sottostante suddivide i casi in base alle diverse fasce temporali di attraversamento, rivelando che la maggior parte dei casi (oltre 1,6 milioni) viene completata entro i primi 0-2 giorni. Questo è un segnale positivo che indica che un'ampia porzione del processo è gestita in modo rapido ed efficiente.\\
+Tuttavia, il grafico evidenzia anche che ci sono casi che richiedono tempi significativamente più lunghi, fino a oltre 4527 giorni. Anche se questi casi estremi sono in numero ridotto, la loro presenza potrebbe indicare problemi o eccezioni che rallentano drasticamente il processo. La distribuzione dei casi attraverso le varie fasce temporali suggerisce che, sebbene la maggior parte dei processi sia gestita efficacemente, ci sono alcune aree che potrebbero beneficiare di una revisione o di interventi per ridurre i tempi di attraversamento.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/DatiReali/ProcessThroughputTimes2.png}
+    \caption{Schermata di Throughput Times}
+    \label{fig:schermata-Throughput-Times}
+\end{figure}
+La seconda sezione si concentra sui colli di bottiglia nel processo, ovvero quelle connessioni tra le attività che aumentano significativamente i tempi di attraversamento. Qui, Celonis identifica quattro principali colli di bottiglia:
+\begin{enumerate}
+    \item \textbf{Scarico componenti $\rightarrow$ Carico da produzione}: Questo passaggio mostra un tempo di attraversamento di \textbf{10 giorni lavorativi}, che colpisce il \textbf{25\%} dei casi. Questo è il collo di bottiglia più significativo e rappresenta un'area critica che potrebbe beneficiare di miglioramenti operativi.
+    
+    \item \textbf{Scarico componenti $\rightarrow$ Scarico componenti}: Anche se questo passaggio ha un tempo di attraversamento inferiore a \textbf{1 giorno lavorativo}, colpisce il \textbf{98\%} dei casi. Questo suggerisce che, sebbene il tempo di attraversamento sia breve, la frequenza con cui questo collo di bottiglia si presenta lo rende rilevante per l'ottimizzazione del processo.
+    
+    \item \textbf{Carico da produzione $\rightarrow$ Scarico componenti}: Un altro collo di bottiglia con un tempo di attraversamento inferiore a \textbf{1 giorno lavorativo}, che però impatta sull'\textbf{85\%} dei casi. Anche in questo caso, la frequenza con cui si verifica questo passaggio lo rende un punto di attenzione.
+    
+    \item \textbf{Carico da produzione $\rightarrow$ Carico da produzione}: Anche se sembra essere un'attività ripetitiva con un tempo di attraversamento inferiore a \textbf{1 giorno lavorativo}, colpisce il \textbf{97\%} dei casi. Questo indica che c'è una ricorrenza significativa di questa attività, che potrebbe rappresentare un'opportunità per ridurre ridondanze e migliorare l'efficienza.
+\end{enumerate}
+La sezione Throughput Times di Celonis fornisce un quadro chiaro delle dinamiche temporali del processo, evidenziando sia le aree di efficienza che i punti critici che richiedono attenzione. La prima sezione ci informa sul tempo medio di attraversamento e sulla distribuzione dei tempi tra i vari casi, mostrando una generale efficienza ma anche la presenza di outlier estremi. La seconda sezione, invece, offre un'analisi dettagliata dei colli di bottiglia, mettendo in luce quei passaggi specifici del processo che rallentano significativamente il flusso complessivo.\\
+L'informazione più critica che emerge è la necessità di intervenire sui colli di bottiglia identificati, specialmente sul passaggio "Scarico componenti $\rightarrow$ Carico da produzione", che con i suoi 10 giorni lavorativi rappresenta il punto più debole dell'intero flusso. Agire su queste aree potrebbe ridurre notevolmente il tempo di attraversamento medio e migliorare l'efficienza generale del processo.
+
+\subsection{Process Activities}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/DatiReali/ProcessActivities.png}
+    \caption{Schermata di Process Activities}
+    \label{fig:schermata-Process-Activities}
+\end{figure}
+La rappresentazione mostra diverse bolle di dimensioni variabili, ognuna delle quali rappresenta una specifica attività del processo. La dimensione delle bolle è proporzionale alla frequenza con cui ciascuna attività si verifica, mentre la colorazione varia da un rosa più chiaro a un rosso più intenso, dove quest'ultimo indica una maggiore frequenza.\\
+Le due bolle più grandi, che dominano la visualizzazione, corrispondono alle attività di "Scarico componenti" e "Carico da produzione". La bolla di "Scarico componenti" è significativamente più grande, indicando che questa è l'attività più frequente nel processo. Questo suggerisce che una gran parte del lavoro operativo si concentra sullo scarico dei componenti, un passaggio critico e centrale nel flusso di lavoro.\\
+Di dimensioni leggermente inferiori, ma comunque molto prominente, è la bolla di "Carico da produzione". Anche questa attività è essenziale, ma la differenza nelle dimensioni tra le due bolle potrebbe indicare che il carico della produzione è un'attività che, sebbene frequente, non è così dominante quanto lo scarico dei componenti.\\
+Attorno a queste due attività principali, ci sono molte altre bolle più piccole che rappresentano attività secondarie come "Trasferimento interno (sca)", "Vendita", "Acquisto" e "Spedizione". Queste attività, pur essendo parte integrante del processo, si verificano con minore frequenza, come indicato dalla loro dimensione ridotta e dalla colorazione meno intensa.\\
+Questa visualizzazione è particolarmente utile per avere un colpo d'occhio sulla distribuzione delle attività e per identificare immediatamente quali operazioni sono le più prevalenti all'interno del processo. Tuttavia, la rappresentazione a bolle, pur essendo visivamente intuitiva, potrebbe nascondere dettagli importanti riguardo le interazioni tra le attività o non fornire informazioni dirette su come queste attività si concatenano nel flusso di lavoro.
+
+\subsection{Process Explorer}
+Questa funzionalità fornisce una visione dinamica dei processi, facilitando la scoperta di insight nascosti e supportando decisioni basate su dati reali per ottimizzare le performance operative.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgCelonis/DatiReali/ProcessExplorer.png}
+    \caption{Schermata di Process Explorer}
+    \label{fig:schermata-Process-Explorer}
+\end{figure}
+Il grafo visualizzato è una rappresentazione completa di come i casi si muovono attraverso le varie attività nel processo. Ogni nodo rappresenta un'attività specifica, mentre le linee che collegano i nodi rappresentano le transizioni o connessioni tra queste attività. La densità e la complessità delle linee indicano la frequenza e la diversità dei percorsi seguiti dai casi.\\
+Nella parte centrale della rete, notiamo che le attività principali come "Scarico componenti" e "Carico da produzione" sono prominenti, con numerose connessioni in entrata e in uscita. Questo riflette la centralità di queste operazioni nel flusso complessivo del processo, suggerendo che una grande parte dei casi passa attraverso queste attività multiple volte, o che queste attività servono come punti di convergenza per altre operazioni.\\
+L'abbondanza di connessioni sottili e intricate che si diramano dai nodi principali e si collegano a una vasta gamma di altre attività indica un processo molto ramificato, con molteplici percorsi alternativi che i casi possono seguire. Questo può essere sintomatico di un processo flessibile ma anche complesso, in cui ci sono numerose varianti operative o eccezioni che devono essere gestite.\\
+A destra dello schermo, sono presenti due barre di scorrimento che permettono di regolare la visibilità delle attività e delle connessioni. Questo è utile per filtrare la complessità e focalizzarsi su specifiche parti del processo. Ad esempio, riducendo il numero di connessioni visualizzate, un analista può isolare i percorsi principali e studiare come i casi attraversano le fasi critiche del processo.\\
+La visualizzazione offre anche la possibilità di cambiare il layout da libero a fisso, permettendo una diversa organizzazione visiva della rete che può aiutare a interpretare meglio le relazioni tra le attività.\\
+Questa mappa del processo è uno strumento potente per comprendere la struttura e il comportamento del flusso di lavoro. La complessità del diagramma riflette la realtà operativa, dove le attività non seguono un percorso lineare ma si intrecciano in modi complessi e dinamici. Questa rappresentazione è particolarmente utile per identificare i punti di congestione, le possibili inefficienze, e per capire come le attività principali influenzano l'intero processo.\\
+Tuttavia, la complessità visiva può anche rappresentare una sfida: senza adeguati filtri o un'interpretazione guidata, può risultare difficile per gli analisti isolare i percorsi più critici o comprendere appieno l'impatto delle diverse connessioni. È qui che le funzionalità interattive di Celonis diventano essenziali per navigare e comprendere la rete di processi in modo efficace.
 \end{document}
