@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[includeheadfoot, margin=1em,headheight=2em]{geometry}
+\usepackage{titling}
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
+\usepackage{graphicx}
+\providecommand{\versionnumber}{1.0.0}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[italian]{babel}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\setlength{\droptitle}{-6em}
+
+%font
+\usepackage[defaultfam,tabular,lining]{montserrat}
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\fontfamily{Montserrat-TOsF}\selectfont #1}}
+
+%custom bold 
+\usepackage[outline]{contour}
+\usepackage{xcolor}
+\newcommand{\custombold}{\contour{black}}
+
+%table colors
+\usepackage{color, colortbl}
+\definecolor{Blue}{rgb}{0.51,0.68,0.79}
+\definecolor{LightBlue}{rgb}{0.82,0.87,0.90}
+\definecolor{LighterBlue}{rgb}{0.93,0.95,0.96}
+
+%Header
+\usepackage{fancyhdr, xcolor}
+\pagestyle{fancy}
+\let\oldheadrule\headrule% Copy \headrule into \oldheadrule
+\renewcommand{\headrule}{\color{Blue}\oldheadrule}% Add colour to \headrule
+\renewcommand{\headrulewidth}{0.2em}
+\fancyhead[L]{Studio Celonis}
+\fancyhead[C]{Samuele Vignotto}
+\fancyhead[R]{\includegraphics[height=1cm]{Logo/Y_LOGO-SOLO.png}}
+\setcounter{secnumdepth}{0}
+
+\title{\Huge{\textbf{Microsoft Process Mining}}\vspace{-1em}}
+\author{Samuele Vignotto}
+\date{}
+\begin{document}
+\maketitle
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6cm, height=6cm]{Logo/Y_LOGO-SOLO.png}
+  \label{fig:immagine}
+\end{figure}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+Process Mining è un modulo dell'ecosistema Power Automate di Microsoft una soluzione avanzata progettata per aiutare le organizzazioni a migliorare e ottimizzare i propri processi aziendali, sfruttando la potenza dell'analisi dei dati e dell'automazione.
+
+\subsection{Visualizzazione dei processi}
+Una delle funzionalità chiave del modulo di Process Mining è la capacità di mappare e visualizzare i processi aziendali così come avvengono realmente. Utilizzando dati storici provenienti da vari sistemi aziendali (ERP, CRM, ecc.), il modulo ricostruisce il flusso di lavoro esistente, permettendo agli utenti di vedere come i processi sono stati eseguiti nel tempo. Questa visualizzazione offre un diagramma chiaro e intuitivo del processo end-to-end, evidenziando le varianti e le deviazioni rispetto al processo ideale.
+
+\subsection{Identificazione delle inefficienze}
+Il Process Mining è progettato per identificare colli di bottiglia, ridondanze e altre inefficienze nei processi aziendali. Analizzando i tempi di esecuzione, le deviazioni e i punti di stallo, la soluzione aiuta le aziende a scoprire dove si verificano ritardi o sprechi, offrendo una base solida per intraprendere azioni correttive.
+
+\subsection{Automazione dei processi}
+Una volta identificati i punti deboli del processo, Power Automate consente di automatizzare le attività ripetitive e ridondanti. Grazie all'integrazione con la suite Power Automate, è possibile creare flussi di lavoro automatizzati che riducono l'intervento manuale, migliorano l'efficienza e riducono il rischio di errori umani.
+
+\subsection{Monitoraggio continuo e ottimizzazione}
+Il modulo di Process Mining non si limita ad analizzare i processi una tantum, ma permette anche un monitoraggio continuo. Le aziende possono impostare alert e notifiche per monitorare le performance dei processi in tempo reale e intervenire prontamente in caso di anomalie. Questo monitoraggio continuo supporta un miglioramento continuo dei processi, permettendo alle organizzazioni di adattarsi rapidamente ai cambiamenti del mercato e alle esigenze dei clienti.
+
+\subsection{Analisi predittiva e simulazioni}
+Grazie all'analisi dei dati storici e all'uso di algoritmi avanzati, Power Automate Process Mining può anche prevedere l'andamento futuro dei processi. Le funzionalità di simulazione permettono agli utenti di testare diversi scenari e valutare l'impatto di eventuali modifiche, prima di implementarle realmente. Questo approccio proattivo consente di pianificare con maggiore precisione e di prendere decisioni informate per migliorare l'efficienza operativa.
+
+\subsection{Integrazione con strumenti Microsoft}
+Un altro vantaggio significativo del modulo Process Mining è la sua perfetta integrazione con altri strumenti e servizi Microsoft, come Power BI per l'analisi dei dati e la visualizzazione avanzata, e Dynamics 365 per la gestione delle operazioni aziendali. Questa integrazione consente di sfruttare al massimo l'ecosistema Microsoft, offrendo una visione unificata e completa delle operazioni aziendali.
+
+\end{document}
