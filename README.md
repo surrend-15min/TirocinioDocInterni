@@ -21,10 +21,10 @@ Questo repository è stato creato per organizzare e documentare tutto il lavoro 
 ### Directory principali:
 
 - **DocumentazioneProdottaLatex/**: Contiene la documentazione prodotta in latex.
+- **FileListaTabelleEstrattore/**: Contiene il file utilizzato dall'estrattore con la lista delle tabelle da estrarre dal database.
 - **Introduzione/**: Contiene il materiale fornito per lo studio.
 - **Logo/**: Contiene il logo aziendale.
 - **SimulazioneDati/**: Contiene le simulazioni dei dati utilizzate per l'analisi di Celonis.
-- **FileListaTabelleEstrattore/**: Contiene il file utilizzato dall'estrattore con la lista delle tabelle da estrarre dal database.
 
 ## Contatti
 
