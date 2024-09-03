@@ -76,6 +76,106 @@ Grazie all'analisi dei dati storici e all'uso di algoritmi avanzati, Power Autom
 \subsection{Integrazione con strumenti Microsoft}
 Un altro vantaggio significativo del modulo Process Mining è la sua perfetta integrazione con altri strumenti e servizi Microsoft, come Power BI per l'analisi dei dati e la visualizzazione avanzata, e Dynamics 365 per la gestione delle operazioni aziendali. Questa integrazione consente di sfruttare al massimo l'ecosistema Microsoft, offrendo una visione unificata e completa delle operazioni aziendali.
 
+\section{Formati di File Accettati}
+
+\subsection{CSV (Comma-Separated Values)}
+Il formato CSV è uno dei più comuni per l'importazione di log degli eventi. I file CSV possono essere caricati direttamente tramite \textit{OneDrive for Business} o altre piattaforme di archiviazione supportate.
+
+\subsection{Excel (XLSX)}
+I file Excel sono supportati, permettendo l'importazione di dati strutturati in fogli di calcolo. Questo è utile quando i dati sono già organizzati in formato tabellare e contengono più fogli con informazioni correlate.
+
+\subsection{JSON (JavaScript Object Notation)}
+I file JSON possono essere utilizzati per strutturare dati complessi, specialmente quando si tratta di dati gerarchici o di oggetti complessi, che devono essere analizzati in modo approfondito.
+
+\subsection{Database relazionali (SQL Server, MySQL, PostgreSQL)}
+È possibile collegarsi direttamente a database relazionali per importare dati in tempo reale. Questo è particolarmente utile per aziende che hanno grandi volumi di dati archiviati in database come SQL Server o PostgreSQL.
+
+\subsection{Dataverse}
+Microsoft Dataverse, parte di Power Platform, è supportato per gestire dati all'interno di ambienti Microsoft 365 e Dynamics 365. Questa piattaforma offre una gestione dei dati altamente scalabile e integrata con altre applicazioni Microsoft.
+
+\section{Fonti di Dati Supportate}
+
+\subsection{Connettori per Applicazioni SaaS}
+Sono disponibili connettori diretti per applicazioni enterprise come \textit{SAP, Salesforce} e \textit{Dynamics 365}, permettendo di estrarre i log degli eventi e altri dati rilevanti direttamente dai sistemi SaaS.
+
+\subsection{Servizi di Archiviazione Cloud}
+È possibile collegarsi a servizi di archiviazione cloud come \textit{OneDrive, SharePoint, Google Drive} per importare file in vari formati, tra cui CSV, Excel o JSON.
+
+\subsection{Power Query}
+\textit{Power Query} è uno strumento integrato in Power BI che consente di connettersi a una vasta gamma di fonti di dati, compresi servizi web, API e database on-premise, facilitando la trasformazione e l'importazione dei dati necessari per il process mining.
+
+\subsection{Servizi Web e API}
+È possibile importare dati da servizi web RESTful e altre API, consentendo di integrare flussi di dati in tempo reale per l'analisi dei processi.
+
+\subsection{Altri Servizi di Business Intelligence}
+Strumenti di BI come \textit{Azure Data Lake, Azure SQL Database} e \textit{Google BigQuery} sono supportati, permettendo l'integrazione con grandi dataset per analisi approfondite.
+
+
+\section{Funzionalità}
+\subsection{Process map}
+La sezione "Process map" dello strumento di process mining di Microsoft rappresenta un aspetto centrale dell'analisi dei processi aziendali, consentendo di visualizzare e comprendere in modo chiaro ed efficace il flusso delle attività all'interno di un'organizzazione. Questa sezione si distingue per la sua capacità di trasformare dati complessi in rappresentazioni visive intuitive, offrendo così una comprensione immediata delle dinamiche operative.\\
+Ogni attività svolta all'interno del flusso di lavoro viene tracciata e rappresentata come un nodo su una mappa, collegato da frecce che indicano la sequenza e la direzione delle operazioni. Questa rappresentazione non solo illustra il percorso ideale delle operazioni, ma mette anche in evidenza tutte le deviazioni e le varianti che possono verificarsi.\\
+Un altro aspetto fondamentale della "Process map" è la capacità di analizzare la frequenza e la durata delle diverse attività. Ogni percorso e nodo può essere arricchito con informazioni quantitative, come il numero di volte in cui un determinato passaggio è stato eseguito e il tempo medio impiegato per completarlo. Questo permette agli utenti di identificare rapidamente le aree critiche o i colli di bottiglia, dove il processo potrebbe essere rallentato o dove si verificano la maggior parte degli errori.\\
+La "Process map" supporta anche la personalizzazione e il filtraggio dei dati. Gli utenti possono selezionare specifiche porzioni del processo, focalizzandosi su un periodo temporale particolare o su un sottoinsieme di casi che soddisfano criteri definiti. Questo livello di dettaglio consente di esaminare i processi con un'ottica precisa, rendendo possibile l’individuazione di problemi specifici e l’analisi delle loro cause radice.
+
+\subsection{Process animation}
+Attraverso l'animazione dei processi, gli utenti possono vedere in tempo reale come le attività vengono eseguite, con ogni evento che si manifesta visivamente sulla mappa del processo.\\
+La caratteristica distintiva della "Process animation" è la sua capacità di riprodurre il flusso delle operazioni nel tempo, come se si stesse guardando una simulazione del processo stesso. Ogni transizione tra le attività viene visualizzata con una progressione fluida, mostrando chiaramente come le operazioni si susseguono. Questo consente agli utenti di cogliere rapidamente l’ordine degli eventi e di comprendere come le diverse parti del processo interagiscono tra loro.\\
+Gli utenti possono accelerare o rallentare l’animazione per analizzare con precisione le parti del processo che risultano più critiche o complesse. Ad esempio, è possibile rallentare la riproduzione per osservare da vicino i passaggi in cui si verificano colli di bottiglia, oppure accelerare per avere una visione d'insieme del processo nel suo complesso.\\
+Durante l’animazione, gli utenti possono osservare come si accumulano le attività in determinati punti del processo, rivelando potenziali inefficienze o aree di sovraccarico. Inoltre, la possibilità di visualizzare le varianti del processo in movimento permette di confrontare in tempo reale diversi flussi di lavoro, individuando immediatamente le differenze e comprendendo meglio le cause delle variazioni.\\
+Un ulteriore vantaggio della funzionalità di animazione è la capacità di enfatizzare eventi specifici, come ritardi o errori. Questi possono essere rappresentati con colori o segnali distintivi durante l'animazione, rendendo immediatamente visibili i problemi che potrebbero richiedere un intervento.\\
+
+\subsection{Statistics}
+Questa sezione è progettata per fornire dati precisi e utili che consentono di approfondire la comprensione del funzionamento dei processi e identificare opportunità di miglioramento.\\
+Gli utenti possono accedere a statistiche che descrivono il numero di volte in cui un'attività specifica è stata eseguita, il tempo medio impiegato per ciascun passaggio, e la variazione di questi tempi all'interno di diversi intervalli temporali o per diversi casi. Questo permette una visione chiara non solo dell'efficienza del processo nel suo complesso, ma anche delle prestazioni di singole attività.\\
+Un aspetto fondamentale delle statistiche offerte è la possibilità di eseguire confronti tra diverse versioni o varianti del processo. Ad esempio, gli utenti possono analizzare come una specifica attività si comporta in differenti contesti, come in diverse sedi aziendali o sotto condizioni operative diverse. Questo confronto aiuta a identificare le migliori pratiche o a individuare aree in cui determinati cambiamenti possono avere un impatto significativo sulle performance complessive.\\
+Inoltre, la funzionalità "Statistics" offre strumenti per segmentare i dati, permettendo di filtrare e analizzare le informazioni per sottogruppi specifici, come particolari clienti, tipologie di ordini, o periodi temporali.\\
+Infine, la rappresentazione visiva dei dati statistici è curata in modo tale da facilitare l'interpretazione. Grafici, istogrammi, e tabelle riassuntive sono utilizzati per visualizzare chiaramente le informazioni, rendendo immediatamente evidenti le distribuzioni dei dati e le relazioni tra le diverse metriche.
+
+\subsection{Root cause analysis}
+Al centro della "Root cause analysis" c'è la capacità di analizzare sistematicamente le deviazioni o i problemi osservati all'interno di un processo, risalendo alle origini di questi problemi attraverso una serie di strumenti analitici avanzati. Quando viene rilevato un comportamento anomalo nel processo, come un ritardo significativo, un errore frequente, o una deviazione dalle procedure standard, questa funzionalità permette di esplorare le varie dimensioni del problema, scomponendo il processo per identificare i fattori specifici che contribuiscono a tale anomalia.\\
+Uno degli aspetti più importanti della "Root cause analysis" è la sua capacità di incrociare e analizzare variabili multiple contemporaneamente. Ad esempio, se un processo presenta ritardi sistematici, lo strumento può esaminare diverse dimensioni come il tempo, le risorse coinvolte, i tipi di casi, e le condizioni operative per individuare correlazioni significative. Questo permette di identificare non solo che un problema esiste, ma anche quali combinazioni di fattori sono più probabilmente alla base di quel problema.\\
+La funzionalità si avvale anche di tecniche avanzate di data mining e machine learning per identificare pattern nascosti nei dati che potrebbero non essere immediatamente evidenti attraverso un'analisi superficiale. Ad esempio, lo strumento può individuare correlazioni tra una specifica configurazione di risorse e l'insorgenza di errori, o tra un particolare percorso di processo e l'aumento dei tempi di attesa. Questi insight sono cruciali per capire le dinamiche sottostanti che influenzano le performance del processo.\\
+Inoltre, la "Root cause analysis" è progettata per essere altamente interattiva e visiva. Gli utenti possono esplorare i dati attraverso visualizzazioni dinamiche che evidenziano le relazioni causali tra diverse variabili. La capacità di visualizzare immediatamente l'impatto di diversi fattori aiuta a guidare il processo decisionale e a determinare quali azioni correttive potrebbero avere l'effetto più significativo.\\
+Infine, la funzionalità "Root cause analysis" supporta un processo decisionale informato e data-driven. Una volta identificate le cause principali di un problema, lo strumento può essere utilizzato per simulare l'effetto di potenziali interventi correttivi, permettendo di valutare in anticipo l'efficacia di diverse soluzioni.
+
+\subsection{Variants}
+Al cuore della funzionalità "Variants" vi è la capacità di mappare e visualizzare tutte le possibili sequenze di attività che compongono un processo. In molti contesti aziendali, un processo non segue sempre un percorso lineare e standardizzato; possono esistere molte varianti basate su fattori come eccezioni, deviazioni o personalizzazioni per specifici clienti o ordini. Questa funzionalità consente di identificare e quantificare queste varianti, mostrando chiaramente quante volte e in quali circostanze ciascuna variante si verifica.\\
+La visualizzazione delle varianti è una delle caratteristiche più potenti di questa funzionalità. Gli utenti possono vedere graficamente come il processo si dirama in vari percorsi, con ciascuna variante rappresentata come un flusso distinto. Questa visualizzazione permette di cogliere immediatamente quali percorsi sono più comuni, quali sono meno frequenti e, soprattutto, dove si manifestano le deviazioni rispetto al processo ideale o previsto.\\
+Un altro aspetto chiave della funzionalità "Variants" è la possibilità di confrontare le prestazioni tra diverse varianti. Gli utenti possono analizzare come la durata, i costi, o la qualità del processo cambiano a seconda della variante presa in esame. Ad esempio, può emergere che una particolare variante, pur essendo meno comune, comporta tempi di completamento significativamente più rapidi o, al contrario, che una variante più frequente è associata a un numero maggiore di errori o ritardi. Questo tipo di analisi è essenziale per identificare opportunità di standardizzazione o per focalizzare gli sforzi di miglioramento su varianti che contribuiscono maggiormente alle inefficienze.\\
+La funzionalità "Variants" consente anche di filtrare e segmentare le varianti in base a criteri specifici. Gli utenti possono esplorare le varianti in base a fattori come il cliente, il tipo di prodotto, il periodo temporale o altre dimensioni rilevanti. Questo livello di dettaglio è fondamentale per comprendere non solo quali varianti esistono, ma anche perché si verificano, permettendo di individuare le cause sottostanti alle differenze operative.
+
+\subsection{Process compare}
+Questa funzionalità è particolarmente utile per le organizzazioni che desiderano confrontare l'efficienza, la conformità, e le performance operative di diversi flussi di lavoro, sia all'interno della stessa unità aziendale che tra unità diverse.\\
+Questa comparazione avviene attraverso una rappresentazione grafica che mette in evidenza i punti in cui i processi divergono, non solo in termini di sequenza delle attività, ma anche in base a metriche chiave come la durata, i costi, e la frequenza delle varie fasi del processo. In questo modo, è possibile vedere a colpo d’occhio come i processi si comportano in diversi scenari o sotto condizioni operative differenti.\\
+Quando si confrontano due processi, è possibile individuare esattamente dove e come differiscono, e quale impatto queste differenze hanno sulle performance complessive. Per esempio, se un processo in una sede aziendale richiede significativamente più tempo rispetto a un'altra sede, lo strumento consente di individuare le specifiche attività che causano questi ritardi e di comprendere le ragioni alla base di tali differenze.\\
+La funzionalità permette anche di analizzare le best practice all'interno dell’organizzazione. Confrontando le performance di diverse varianti del processo, gli utenti possono identificare quali configurazioni operative portano ai risultati migliori. Queste informazioni sono preziose per standardizzare le procedure e implementare le pratiche più efficienti su scala più ampia all'interno dell'organizzazione.\\
+Inoltre, "Process Compare" offre strumenti di filtraggio avanzati, che consentono di limitare l'analisi a determinati intervalli temporali, specifiche risorse, o particolari gruppi di casi. Questo livello di dettaglio è essenziale per capire le differenze nei processi sotto differenti condizioni operative, come ad esempio in periodi di picco della domanda o quando vengono impiegate risorse diverse. Tale granularità permette un'analisi estremamente mirata, facilitando l'individuazione delle cause di eventuali inefficienze o problemi specifici.
+
+\section{Integrazioni con Strumenti Microsoft}
+
+\subsection{Microsoft Power BI}
+Microsoft Power BI è strettamente integrato con lo strumento di process mining. Power BI consente di creare report visivi dettagliati che aiutano a identificare colli di bottiglia e a migliorare i processi aziendali. L'integrazione con Power BI permette di trasformare i dati di process mining in insight azionabili, utilizzando dashboard interattivi e report personalizzabili.
+
+\subsection{Microsoft Power Automate}
+Power Automate è la piattaforma centrale per eseguire process mining all'interno dell'ecosistema Microsoft. Con Power Automate, è possibile automatizzare i flussi di lavoro basati su dati di process mining, collegando diverse applicazioni e servizi per ottimizzare i processi aziendali in tempo reale.
+
+\subsection{Microsoft Dynamics 365}
+Dynamics 365 si integra perfettamente con lo strumento di process mining, permettendo di analizzare i processi all'interno dei moduli ERP e CRM. Questa integrazione consente di ottenere una visione completa dei processi aziendali, dalla gestione delle relazioni con i clienti fino alla catena di fornitura.
+
+\subsection{Microsoft Dataverse}
+Dataverse fornisce un'infrastruttura dati centralizzata che è altamente integrata con lo strumento di process mining. Questa integrazione permette di gestire i dati aziendali in modo centralizzato e di utilizzarli per analisi avanzate dei processi, facilitando la gestione e la condivisione dei dati tra diverse applicazioni all'interno della piattaforma Microsoft Power.
+
+\subsection{Microsoft Azure}
+Azure offre una serie di servizi che possono essere utilizzati in combinazione con lo strumento di process mining. Azure Data Lake e Azure SQL Database sono particolarmente utili per l'archiviazione e l'elaborazione di grandi volumi di dati, che possono poi essere analizzati tramite Power BI e Power Automate.
+
+\subsection{Microsoft SharePoint}
+SharePoint si integra con lo strumento di process mining, consentendo di accedere e condividere documenti e dati utilizzati nei processi di analisi. L'integrazione con SharePoint facilita la collaborazione tra i team e la condivisione dei risultati delle analisi dei processi.
+
+\subsection{Microsoft Teams}
+Teams può essere utilizzato in combinazione con lo strumento di process mining per facilitare la collaborazione e la comunicazione tra i membri del team. I risultati delle analisi possono essere condivisi direttamente in Teams, permettendo ai team di discutere e prendere decisioni basate sui dati in modo più efficiente.
+
+
 \section{Implementazioni pratiche: simulazioni}
 \subsection{Prima simulazione}
 \subsubsection{Struttura del file CSV}
