@@ -659,4 +659,245 @@ Un altro aspetto cruciale della funzionalità di comparazione è la stratificazi
 La comparazione dei processi è essenziale non solo per monitorare i cambiamenti apportati a un processo esistente, ma anche per verificare se le modifiche implementate abbiano effettivamente prodotto i risultati desiderati. La possibilità di confrontare una nuova versione di un processo con quella precedente aiuta a valutare l'impatto di queste modifiche, permettendo di capire se il flusso sia stato ottimizzato o se siano emerse nuove problematiche. Allo stesso tempo, la funzionalità offre l’opportunità di standardizzare processi aziendali, specialmente in contesti dove è essenziale mantenere uniformità operativa tra diversi dipartimenti o sedi geografiche.\\
 
 \section{Implementazioni pratiche: dati reali}
+\subsection{Struttura dei dati}
+Per testare le funzionalità dello strumento di process mining di Microsoft, è stata scelta una tabella del database ERP di un'azienda produttrice di porte. Nello specifico, si è deciso di utilizzare la tabella che registra i movimenti di magazzino, poiché ogni movimento rappresenta un'attività nel processo di produzione. Inoltre, questa tabella è ricca di dati, offrendo così un'ampia base di informazioni per l'analisi.\\
+Le colonne della tabella sono le seguenti:
+\begin{itemize}
+    \item \custombold{NRO\_REGISTRAZIONE}: numero di registrazione del movimento di magazzino;
+    \item \custombold{DATA\_MOVIMENTO}: data di creazione del movimento di magazzino;
+    \item \custombold{COD\_CAUSALE}: codice di riferimento della causale del movimento di magazzino;
+    \item \custombold{MASTRO}: codice mastro del cliente o del fornitore del movimento;
+    \item \custombold{PARTITARIO}: codice partitario del cliente o del fornitore del movimento;
+    \item \custombold{NRO\_DOCUMENTO}: indica il numero del documento che ha originato il movimento;
+    \item \custombold{DATA\_DOCUMENTO}: indica la data del documento che ha orignato il movimento;
+    \item \custombold{NRO\_REGIST\_MOV\_ABB}: numero registrazione del movimento abbinato;
+    \item \custombold{COD\_MAGAZZINO}: codice del magazzino da proporre a livello di riga;
+    \item \custombold{COD\_VALUTA}: valuta alla quale è stato eventualmente valorizzato il movimento;
+    \item \custombold{CAMBIO}: valore del cambio del movimento;
+    \item \custombold{MASTRO\_AGENTE}: mastro agente collegato al movimento;
+    \item \custombold{NRO\_ORDINE}: riferimento all`ordine nel movimento;
+    \item \custombold{NRO\_RIF\_CONTAB\_FATTURA}: numero di riga della registrazione del movimento contabile della fattura legato al documento che ha generato il movimento di magazzino;
+    \item \custombold{RIGA\_RIF\_CONTAB\_FATTURA}: riga della registrazione contabile della fattura a cui il movimento di magazzino si riferisce;
+    \item \custombold{RIF\_LOTTO}: non utilizzato;
+    \item \custombold{NRO\_FT}: acquisti: numero della fattura attribuito dal fornitore; vendite: Sez/Nro fattura;
+    \item \custombold{DATA\_FT}: acquisti: data della fattura attribuita dal fornitore; vendite: data fattura;
+    \item \custombold{RIF\_ANNO\_DOC}: questo attributo e i seguenti contengono gli estremi del documento che ha generato il documento di magazzino;
+    \item \custombold{RIF\_TIPO\_DOC}
+    \item \custombold{RIF\_NRO\_DOC}
+    \item \custombold{AMBITO\_RIF\_DOC}: questo attributo definisce se il movimento di magazzino e stato inserito manualmente oppure se e stato generato da un documento di vendita o di acquisto;
+    \item \custombold{DATA\_COMP}: data di competenza della registrazione.
+    \item \custombold{RIF\_MOV\_MAG\_SCAR\_COMP}: riferimento all'eventuale movimento di scarico componenti;
+    \item \custombold{ALTRI\_RIF\_TEST}: campo descrittivo a disposizione dell'utente;
+    \item \custombold{TXT\_A\_DISP\_1}: testo a disposizione 1;
+    \item \custombold{TXT\_A\_DISP\_2}: testo a disposizione 2;
+    \item \custombold{TXT\_A\_DISP\_3}: testo a disposizione 3;
+    \item \custombold{DATA\_A\_DISP\_1}: data  a disposizione 1;
+    \item \custombold{DATA\_A\_DISP\_2}: data  a disposizione 2;
+\end{itemize}
+Inoltre, è stata associata a questa tabella un'altra tabella contenente le informazioni sulle causali di magazzino, necessarie per etichettare i dati della prima tabella rendendoli più facilmente leggibili. La struttura della tabella delle causali di magazzino è la seguente:
+\begin{itemize}
+    \item \custombold{COD\_CAUSALE}: codice causale;
+    \item \custombold{DESCRIZIONE}: descrizione;
+    \item \custombold{MAGAZZ\_DEFAULT}: indica il magazzino da proporre come default per i movimenti di magazzino che appartengono alla causale;
+    \item \custombold{MAGAZZ\_COLL\_DEFAULT}: indica il magazzino collegato da proporre come default per i movimenti di magazzino che appartengono alla causale;
+    \item \custombold{SE\_REG\_FISCALE}: indica se il movimento deve essere stampato nel registro fiscale o meno;
+    \item \custombold{SE\_QUANTITA}: indica se la valorizzazione della quantita e obbligatoria con il programma di gestione movimenti di magazzino (Y/N);
+    \item \custombold{SE\_PREZZO}: indica se la valorizzazione di prezzo e valore e obbligatoria con il programma di gestione movimenti di magazzino (Y/N);
+    \item \custombold{SE\_SCONTO}: indica se la valorizzazione dello sconto e obbligatoria con il programma di gestione movimenti di magazzino (Y/N);
+    \item \custombold{COD\_CAUSALE\_ULT\_PREZZO}: indica il tipo di prezzo di movimento proposto come default dal programma di gestione movimenti (prezzo medio, ultimo prezzo di carico, ...);
+    \item \custombold{COD\_CAUSALE\_DB}: collegamento tra magazzino e produzione;
+    \item \custombold{INPUT\_CLI\_FORN\_TUTTI}: indica per quali conti è valida la causale se per clienti, fornitori o tutti;
+    \item \custombold{COD\_TIPO\_RIEPILOGO}: questo attributo indica se il movimento è di Esistenza iniziale, di Carico o di Scarico;
+    \item \custombold{EVEN\_COD\_CAUSALE\_ABB}: nel caso sia presente la causale abbinata significa che la causale di movimentazione prevede un movimento abbinato;
+    \item \custombold{ART\_DIV\_SU\_CAUS\_ABB}: indica che l`articolo movimentato dalla causale abbinata e diverso dall`articolo movimentato dalla causale corrente;
+    \item \custombold{SE\_VALIDO\_PER\_PREZ\_MED}: includere o meno il movimento nel calcolo del prezzo medio dell`articolo;
+    \item \custombold{AGG\_DATI\_FORNITORE}: Non gestito;
+    \item \custombold{SE\_DA\_FATT}: indica se il documento di vendita corrispondente al movimento e da fatturare o meno;
+    \item \custombold{INTRA\_COD\_TRANSAZIONE}: codice transazione (per intrastat);
+    \item \custombold{SE\_GEST\_LOTTI}: indica se è prevista la gestione a lotti;
+    \item \custombold{SE\_NON\_MOV\_MAG}: indica se il magazzino deve essere o meno movimentato;
+    \item \custombold{TIPO\_ART\_ABIT}: tipo articolo abituale per movimenti manuali;
+    \item \custombold{PROP\_ULT\_PZZO}: tipo proposta;
+    \item \custombold{SE\_ANALITICA}: indica se la valorizzazione dei riferimenti contabilita analitica (voce di spesa, centro di costo e commessa) è obbligatoria con il programma di gestione movimenti di magazzino (Y/N);
+    \item \custombold{TIPO\_COSTO\_ULT\_PREZZO}: tipo costo per prezzo di default;
+    \item \custombold{SE\_VALIDO\_PER\_PREZ\_PRJ}: includere o meno il movimento nel calcolo del prezzo medio di progetto;
+    \item \custombold{COD\_CAUS\_MOV\_PRJ}: causale di movimentazione della contabilita di progetto;
+    \item \custombold{SE\_VAL\_MOV\_DOCUMENTO}: indica se il movimento di magazzino generato da documento deve essere valorizzato (Y/N);
+    \item \custombold{SE\_PRZ\_MEDIO\_NO\_VAL}: indica se il movimento di magazzino viene considerato per il calcolo del prezzo medio anche se privo di valore (Y/N).
+\end{itemize}
+A causa della limitazione della licenza dello strumento di process mining, l'analisi è stata eseguita su un subset della tabella, limitato a un massimo di 100 MB di dati. Questo implica che non tutti i dati disponibili nel database sono stati utilizzati, ma solo quelli necessari e sufficienti per condurre l'analisi.
+
+\subsection{Process map}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/ProcessMapDatiReali.png}
+    \caption{Process map}
+    \label{fig:process-map}
+\end{figure}
+La mappa inizia con i movimenti principali legati alla gestione dei materiali, come il carico e lo scarico dei componenti, rappresentati visivamente attraverso nodi e collegamenti che indicano il flusso del processo. Ogni nodo rappresenta un'attività specifica all'interno del ciclo operativo, che può riguardare la ricezione di materiali, l'allocazione delle risorse in magazzino, l'emissione di ordini di fornitura e la gestione dei documenti di riferimento, come fatture e ordini di acquisto.\\
+Man mano che il processo si evolve, si osservano diverse diramazioni che riflettono le variabili introdotte dalle differenti causali di magazzino. Per esempio, le attività legate al controllo delle scorte e alla registrazione delle transazioni sono seguite da operazioni come la generazione di documenti fiscali o l'abbinamento di ordini con le rispettive fatture. La complessità della gestione del magazzino viene chiaramente rappresentata nella mappa, grazie ai collegamenti multipli tra le diverse attività, che evidenziano le possibili interazioni tra fornitori, clienti e il sistema interno dell'azienda.\\
+I nodi di dimensioni maggiori indicano attività con una frequenza elevata, suggerendo che queste rappresentano i passaggi più critici e ripetuti nel flusso di lavoro. Al contrario, i nodi più piccoli o meno collegati possono rappresentare attività opzionali o meno frequenti, ma che potrebbero comunque influire sull'efficienza complessiva del processo.\\
+La presenza di loop e cicli nella mappa è un aspetto interessante da analizzare. Questi loop possono indicare la ripetizione di alcune operazioni, come la rielaborazione di documenti o la verifica di movimenti precedenti. La visualizzazione di questi cicli può aiutare a identificare possibili inefficienze nel processo, come ritardi legati alla gestione dei documenti o problemi nella sincronizzazione tra diverse unità operative.\\
+
+\subsection{Statistics case overview}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsCaseOverviewDatiReali.png}
+    \caption{Statistiche dei casi}
+    \label{fig:statistics-case-overview}
+\end{figure}
+Questa schermata permette di analizzare le caratteristiche temporali e operative dei casi, evidenziando metriche come la durata, il tempo di attesa, il rework (rilavorazione) e la presenza di loop nel processo.\\
+Il grafico temporale in alto mostra l'andamento dei casi attivi nel tempo, con una distribuzione piuttosto uniforme, ma che si intensifica in alcuni intervalli, segnalando probabilmente periodi di maggiore attività logistica o produzione. L'asse temporale evidenzia una finestra che si estende dal 2010 al 2016, con un picco di attività tra il 2014 e il 2015, indicato dall'aumento del numero di casi attivi.\\
+Nel pannello sottostante, la tabella delle statistiche elenca dettagliatamente ogni singolo caso. Le informazioni chiave includono il numero di eventi per caso, la durata complessiva, il tempo attivo, il tempo di attesa, e i dati sulle inefficienze del processo come i loop e il rework. La durata dei casi varia significativamente, con alcuni che si estendono per oltre 1500 giorni, mentre altri sono molto più brevi, indicativi della diversità delle operazioni di magazzino coinvolte.\\
+Uno degli aspetti notevoli di questa schermata è il tempo di attesa elevato per molti casi. Ad esempio, il caso "06/27" ha un tempo di attesa di 1554 giorni, il che può indicare potenziali ritardi o pause nel processo che potrebbero richiedere un'ulteriore indagine. Il tempo attivo dei casi, tuttavia, rimane costantemente a zero, suggerendo che i casi stessi possono rappresentare transazioni logistiche o contabili che, pur coprendo lunghi periodi di tempo, non comportano attività continue.\\
+Le percentuali di rework e loop, presenti in molti casi, rappresentano indicatori critici di inefficienza. Alcuni casi, come "06/39", mostrano un rework significativo al 50\%, il che suggerisce che alcune fasi del processo vengono ripetute o rielaborate più volte. Questo tipo di informazione è prezioso per individuare aree dove il processo può essere ottimizzato o semplificato. Inoltre, l'indicazione di self-loop evidenzia potenziali cicli di attività che potrebbero indicare ridondanze o punti deboli nel flusso di lavoro.\\
+L'indicatore di "Mean Utilization" (utilizzo medio) al 90,22\% è notevole e segnala che, in media, le risorse vengono utilizzate in modo efficiente per la maggior parte del tempo. Tuttavia, il fatto che molti casi presentino durate molto lunghe senza tempo attivo suggerisce che, sebbene il processo sembri efficiente, potrebbe esserci spazio per migliorare l'effettivo completamento delle attività.\\
+
+\subsection{Edge statistics}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsEdgeStatisticsDatiReali.png}
+    \caption{Statistiche delle connessioni}
+    \label{fig:edge-statistics}
+\end{figure}
+Questa sezione si concentra sulle connessioni, o "edge," che rappresentano i passaggi tra le varie fasi del flusso di lavoro. Ogni "edge" riflette una relazione tra due attività, e la schermata presenta informazioni dettagliate sulla frequenza dei casi, la durata e altri indicatori chiave, utili per comprendere l'efficienza del processo.\\
+Il numero totale di "edge" rappresentato in questa schermata è 95, con una grande varietà di frequenze e durate associate. Alcuni passaggi del processo appaiono più frequentemente di altri, come indicato dalle colonne "Case frequency" e "Event frequency". Ad esempio, la transizione tra "Scarico componenti" e "Carico da produzione" è quella più frequente, con 238.786 casi, che rappresentano il 66,15\% del totale, e con una durata complessiva di oltre 159.241 giorni. Anche il passaggio inverso, da "Carico da produzione" a "Scarico componenti", è molto frequente, riflettendo probabilmente un ciclo continuo di carico e scarico durante il processo produttivo.\\
+Un altro importante collegamento nel flusso è quello tra "Scarico componenti" e se stesso (una sorta di loop), con un totale di 79.865 casi e una durata complessiva di 239.890 giorni, che rappresenta l'8,79\% del tempo complessivo del processo. Questo potrebbe indicare una fase ripetitiva o ridondante nel ciclo produttivo che potrebbe essere ottimizzata per ridurre la durata complessiva del processo.\\
+Tra le altre transizioni rilevanti troviamo i trasferimenti interni, come il passaggio da "Trasferimento interno (sca)" a "Trasferimento interno (car)" e da "Carico da produzione" a "Trasferimento interno", che seppur meno frequenti rispetto ad altre attività principali, sono fondamentali per la gestione del magazzino.\\
+La distribuzione della frequenza dei casi evidenziata nel grafico di questa schermata mostra una forte concentrazione di transizioni in alcune fasi principali del processo, mentre altre connessioni appaiono molto meno frequenti. Le transizioni che coinvolgono la "Vendita" e la "Spedizione" sono tra quelle con la durata maggiore. Ad esempio, il passaggio da "Vendita" a "Vendita" copre un arco temporale totale di 527.512 giorni, con una durata media per caso di ben 359 giorni, un chiaro indicatore di lunghe fasi di vendita o possibili ritardi nel processo.\\
+Le durate variano significativamente da un edge all'altro. Molte transizioni appaiono completarsi in tempi molto brevi, indicati come "0ms" in diversi casi, suggerendo che alcuni processi siano piuttosto rapidi, o che non ci sia effettivo tempo di transizione tra alcune fasi del ciclo di produzione e magazzino, o è dovuto al formato dei dati presenti nel database. Tuttavia, altri passaggi mostrano durate estese, come il già menzionato passaggio tra "Vendita" e "Vendita" o il passaggio da "Vendita" a "Spedizione," con una durata media di 144 giorni.\\
+Il numero medio di occorrenze per caso è un altro indicatore importante. Le transizioni principali, come tra "Scarico componenti" e "Carico da produzione", possono verificarsi fino a 33 volte all'interno di un singolo caso, riflettendo l'importanza di tali fasi nel ciclo di produzione.\\
+
+\subsection{Statistics AMBITO\_RIF\_DOC}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsAMBITORIFDOCDatiReali.png}
+    \caption{Statistiche attributo: AMBITO\_RIF\_DOC}
+    \label{fig:statistics-AMBITO-RIF-DOC}
+\end{figure}
+La schermata "Statistics: AMBITO\_RIF\_DOC" fornisce un'analisi dei dati legati all'attributo AMBITO\_RIF\_DOC, che indica il contesto o l'ambito di riferimento del documento all'interno del processo. Questo attributo suddivide i movimenti di magazzino in tre categorie principali: A (inserito manualmente), V (documenti di vendita), e P (documenti di acquisto). La schermata fornisce dettagli su come questi tre valori si distribuiscono in termini di frequenza di casi e di eventi, evidenziando la prevalenza di ciascuna categoria all'interno del flusso di lavoro aziendale.\\
+La tabella statistica mostra che il valore P, associato ai documenti di acquisto, è di gran lunga il più frequente, rappresentando il 97,68\% dei casi totali, con una frequenza di 352.589 casi e 954.353 eventi. Questo indica che la maggior parte dei movimenti di magazzino analizzati deriva da processi legati a documenti di acquisto. La frequenza degli eventi associati a P rappresenta il 98,01\% del totale, confermando l'importanza predominante di questa categoria nel sistema aziendale.\\
+In confronto, V (documenti di vendita) copre una parte minore del processo, con 5.027 casi, che rappresentano solo l'1,39\% del totale. Anche se la frequenza degli eventi per V è più alta rispetto ai casi (1,51\%), ciò suggerisce che i documenti di vendita sono meno comuni ma comportano un numero relativamente maggiore di eventi per ogni caso.\\
+Infine, il valore A, che rappresenta i movimenti inseriti manualmente, è il meno frequente, con soli 3.422 casi (0,95\%) e una frequenza di eventi di 4.701 (0,48\%). Questo valore rappresenta le operazioni manuali che, sebbene meno frequenti, sono comunque una parte significativa del processo di magazzino.\\
+Il grafico delle frequenze dei casi mostra chiaramente la disparità tra le tre categorie, con P che domina il processo. Questo potrebbe indicare un processo aziendale fortemente orientato all'acquisto di materiali o prodotti, con movimenti di magazzino strettamente legati a operazioni di fornitura. Il numero relativamente basso di movimenti legati a V e A potrebbe riflettere una minore complessità nei flussi di vendita o una ridotta dipendenza da inserimenti manuali.\\
+Le colonne che indicano la massima occorrenza in un caso, come nel caso del valore P, mostrano fino a 69 occorrenze per caso, suggerendo che alcuni documenti di acquisto generano un numero significativo di movimenti all'interno del magazzino. Questo è particolarmente utile per identificare casi complessi o carichi di lavoro elevati legati a singoli fornitori o ordini.\\
+Tuttavia, è importante notare che tutte le categorie presentano durate pari a "0ms", il che suggerisce che non ci sono informazioni dettagliate sulla durata effettiva delle attività o che queste durate non sono state registrate o non sono rilevanti in questo contesto.
+
+\subsection{Statistics COD\_MAGAZZINO}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsCODMAGAZZINODatiReali.png}
+    \caption{Statistiche attributo: COD\_MAGAZZINO}
+    \label{fig:statistics-COD-MAGAZZINO}
+\end{figure}
+La schermata "Statistics: COD\_MAGAZZINO" fornisce un'analisi delle frequenze dei codici di magazzino utilizzati nel processo di gestione dei movimenti. Questo attributo riflette i vari magazzini coinvolti e il numero di casi e eventi associati a ciascuno di essi. L'analisi consente di comprendere meglio l'utilizzo dei diversi magazzini all'interno del processo aziendale e di valutare la loro rilevanza in base alla frequenza con cui vengono coinvolti nei flussi operativi.\\
+La tabella statistica elenca 20 codici di magazzino, ognuno con una frequenza variabile. La distribuzione dei dati è dominata da un codice di magazzino con una frequenza molto elevata, 349.760 casi, rappresentando una porzione significativa del processo.\\
+I codici di magazzino con una frequenza inferiore, come 6, 18 e 22, sono coinvolti in pochissimi casi, con valori che vanno da 2 a 8 casi, suggerendo che potrebbero rappresentare magazzini secondari o utilizzati per operazioni occasionali o specifiche.\\
+La differenza nella frequenza degli eventi riflette anche un quadro simile, con la maggior parte dei codici di magazzino che gestisce un numero limitato di eventi. Il codice più utilizzato, che gestisce 349.760 casi, mostra una forte centralizzazione delle attività su un singolo magazzino, con altri che partecipano solo marginalmente al flusso complessivo.\\
+Anche i valori medi e massimi di occorrenza per caso sono bassi, suggerendo che la maggior parte dei movimenti coinvolge un numero ridotto di operazioni per singolo caso. L'assenza di valori di durata suggerisce che i tempi legati ai movimenti di magazzino non sono registrati o non sono rilevanti in questo contesto specifico.\\
+
+\subsection{Statistics DATA\_COMP}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsDATACOMPDatiReali.png}
+    \caption{Statistiche attributo: DATA\_COMP}
+    \label{fig:statistics-DATA-COMP}
+\end{figure}
+La schermata "Statistics: DATA\_COMP" fornisce un'analisi della frequenza delle date di competenza (DATA\_COMP) relative ai movimenti di magazzino. La data di competenza è un attributo fondamentale per determinare il momento in cui un determinato evento di magazzino è stato registrato per finalità contabili e di gestione interna. Attraverso questa schermata, è possibile osservare la distribuzione temporale degli eventi e dei casi associati alle date di competenza, permettendo di analizzare l'andamento nel tempo della registrazione dei movimenti.\\
+La tabella statistica mostra 661 valori distinti di date di competenza. Queste date coprono un arco temporale che inizia con i primi eventi registrati nel 2011 e continua fino al 2013. La frequenza dei casi varia significativamente, con una frequenza minima di 1 e una frequenza massima di 943.707. Questo ampio intervallo indica che alcune date hanno un volume molto più alto di casi e movimenti rispetto ad altre, suggerendo possibili picchi operativi in determinati periodi.\\
+La maggior parte delle date elencate nella tabella ha una frequenza di casi e di eventi molto bassa, spesso limitata a pochi eventi per data, come evidenziato da valori come 1, 2 o 3. Tuttavia, alcune date, pur con frequenze individuali basse, fanno parte di un'ampia distribuzione che contribuisce alla frequenza media di 1.473,15 movimenti per data.\\
+La forte deviazione standard di 36.676,44 riflette ulteriormente l'ampia disparità tra i valori più alti e quelli più bassi, suggerendo che le operazioni di magazzino non seguono un andamento regolare ma piuttosto fluttuano considerevolmente a seconda del periodo. Questa irregolarità potrebbe derivare da cicli di produzione, scadenze di fine mese o eventi aziendali stagionali che influenzano l'attività di magazzino.\\
+
+\subsection{Statistics DATA\_DOCUMENTO}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsDATADOCUMENTODatiReali.png}
+    \caption{Statistiche attributo: DATA\_DOCUMENTO}
+    \label{fig:statistics-DATA-DOCUMENTO}
+\end{figure}
+Questa statistica riflette l'utilizzo delle date dei documenti per tracciare gli eventi e i casi all'interno del processo di gestione del magazzino. Le date dei documenti rappresentano i momenti in cui vengono creati e registrati i documenti legati ai movimenti di magazzino.\\
+Il dataset contiene 1.700 valori distinti di date di documento. La frequenza di queste date varia notevolmente, con una frequenza minima di 1 e una frequenza massima che raggiunge 610.417. Questo ampio intervallo suggerisce che alcuni giorni hanno un'elevata concentrazione di documenti associati a eventi e movimenti, mentre altri giorni hanno un numero significativamente minore di documenti.\\
+Il valore medio della frequenza è di 572,8, con una deviazione standard di 14.823,27, indicando una notevole variabilità nelle registrazioni. La tabella evidenzia che molte date riportano una bassa frequenza di casi e movimenti associati, con numerosi valori che presentano solo 1 o 2 eventi per data. Tuttavia, alcune date isolano grandi picchi, come evidenziato dalla distribuzione visiva dei dati, dove alcuni giorni specifici presentano un alto volume di movimenti.\\
+I giorni con un volume estremamente alto di documenti (come indicato dal valore massimo di 610.417) potrebbero rappresentare momenti cruciali del processo aziendale, come il rilascio di un grande numero di ordini o la chiusura di importanti cicli di produzione. Al contrario, la maggior parte delle altre date rappresenta giorni con un'attività di magazzino più moderata o frammentata, con frequenze di casi molto basse.\\
+
+\subsection{Statistics DATA\_FT}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsDATAFTDatiReali.png}
+    \caption{Statistiche attributo: DATA\_FT}
+    \label{fig:statistics-DATA-FT}
+\end{figure}
+La schermata "Statistics: DATA\_FT" rappresenta l'analisi statistica delle date delle fatture (DATA\_FT) registrate all'interno del sistema di gestione dei movimenti di magazzino dell'azienda. Questi dati consentono di monitorare e analizzare le operazioni contabili legate alle fatture di acquisto o vendita associate a ciascun movimento di magazzino.\\
+Il dataset include 557 valori unici relativi a "DATA\_FT", cioè le date di registrazione delle fatture. Le frequenze dei casi variano significativamente, con una frequenza minima di 1 e una frequenza massima di 963.095. Il valore medio della frequenza è di 1.748,21 con una deviazione standard molto alta di 40.770,2, evidenziando un'enorme dispersione nei valori.\\
+Osservando la distribuzione dei dati, emerge che la maggior parte delle date ha un basso numero di eventi associati, come evidenziato dalle frequenze che per lo più si aggirano attorno all'unità. Questo è particolarmente evidente nel caso delle date più vecchie, mentre un numero ridotto di date mostra un volume molto elevato di movimenti collegati, come suggerito dal massimo di 963.095 eventi registrati in una sola data.\\
+I valori che mostrano solo 1 evento per data indicano registrazioni isolate, probabilmente corrispondenti a operazioni minori o occasionali. In contrapposizione, le date con migliaia di eventi rappresentano probabilmente momenti di alta attività contabile, come potrebbe verificarsi durante la chiusura di esercizi o la gestione di operazioni massive con fornitori o clienti.\\
+
+\subsection{Statistics DESCRIZIONE}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsDESCRIZIONEDatiReali.png}
+    \caption{Statistiche attributo: DESCRIZIONE}
+    \label{fig:statistics-DESCRIZIONE}
+\end{figure}
+La schermata "Statistics: DESCRIZIONE" offre un'analisi dettagliata delle diverse attività descritte nei movimenti di magazzino dell'azienda.
+Nel database sono state registrate 27 diverse attività, ognuna delle quali rappresenta un'operazione specifica, come "Scarico interno", "Carico interno", "Reso da cliente", "Rientro da conto visione (sca)", e molte altre. Le frequenze associate a queste attività variano ampiamente, con una frequenza minima di 1 per attività meno comuni e una massima di 599.791 per attività di gran lunga più comuni, evidenziando una differenziazione significativa nella distribuzione operativa.\\
+La frequenza media delle attività è di 36.064,96 con una deviazione standard molto alta di 128.103,2. Questo evidenzia come la maggior parte delle attività avvenga molto raramente, mentre poche attività dominano il flusso di lavoro quotidiano.\\
+La schermata riflette una struttura operativa in cui poche attività chiave sembrano gestire la maggior parte delle operazioni di magazzino. Questo comportamento è coerente con la natura delle operazioni logistiche, in cui movimenti principali (come grandi volumi di carico o scarico) dominano il flusso, mentre attività più specifiche o occasionali si verificano solo in contesti rari e ben definiti.\\
+
+\subsection{Statistics MASTRO\_AGENTE}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsMASTROAGENTEDatiReali.png}
+    \caption{Statistiche attributo: MASTRO\_AGENTE}
+    \label{fig:statistics-MASTRO-AGENTE}
+\end{figure}
+La schermata "Statistics: MASTRO\_AGENTE" presenta un'analisi dei dati relativi ai "Mastro Agente" utilizzati nei movimenti di magazzino. Questo campo è particolarmente rilevante per tracciare i movimenti collegati a specifici agenti o per individuare quelli non associati a un agente specifico. L'analisi evidenzia la frequenza dei casi e degli eventi associati a ogni "Mastro Agente", permettendo di comprendere la distribuzione delle operazioni rispetto a questi identificatori.\\
+La schermata mostra quattro valori distinti per il campo "MASTRO\_AGENTE", di cui tre sono codici specifici (205.010, 205.020 e 205.001) e uno rappresenta i movimenti non collegati a nessun agente specifico (valore 0). Il valore più frequente è il codice 0, che rappresenta il 99\% dei casi analizzati, dimostrando che la maggior parte dei movimenti di magazzino non è associata a un "Mastro Agente". Questo è un dato significativo, suggerendo che i movimenti gestiti direttamente senza riferimento a un agente costituiscono il grosso delle operazioni.\\
+D'altro canto, i valori per i codici specifici di "Mastro Agente" mostrano una minore incidenza. Il codice "205.001" è il più frequente tra i valori con agenti, con il 1,19\% dei casi e il 1,25\% degli eventi associati, mentre "205.020" e "205.010" hanno percentuali trascurabili rispetto al totale.
+
+\subsection{Statistics MASTRO}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsMASTRODatiReali.png}
+    \caption{Statistiche attributo: MASTRO}
+    \label{fig:statistics-MASTRO}
+\end{figure}
+La schermata "Statistics: MASTRO" fornisce una panoramica dettagliata sui movimenti di magazzino suddivisi in base ai codici "Mastro", che rappresentano clienti, fornitori o altri soggetti legati ai movimenti. L'analisi evidenzia la distribuzione delle frequenze dei casi e degli eventi, permettendo di comprendere meglio il peso di ciascun codice "Mastro" nel contesto delle operazioni di magazzino.\\
+La distribuzione delle frequenze evidenzia una significativa concentrazione di movimenti che non fanno riferimento a un "Mastro" specifico. Questo potrebbe indicare che la maggior parte delle operazioni viene gestita internamente senza bisogno di specificare una controparte esterna, come un cliente o un fornitore. D'altro canto, quando un "Mastro" è associato, i codici "105.001" e "205.001" sono quelli maggiormente utilizzati, ma comunque con una presenza marginale rispetto al totale delle operazioni.\\
+È interessante notare come, sebbene il codice "205.001" abbia un numero significativo di eventi associati (5.508 eventi), il codice "105.001" sia leggermente più frequente, con 13.194 eventi. Questo suggerisce una differenza di utilizzo tra i diversi "Mastro", dove "105.001" potrebbe rappresentare un soggetto con maggior coinvolgimento in termini di eventi di magazzino.
+
+\subsection{Statistics PARTITARIO\_AGENTE}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsPARTITARIOAGENTEDatiReali.png}
+    \caption{Statistiche attributo: PARTITARIO\_AGENTE}
+    \label{fig:statistics-PARTITARIO-AGENTE}
+\end{figure}
+La schermata "Statistics: PARTITARIO\_AGENTE" fornisce un'analisi dettagliata della distribuzione dei movimenti di magazzino associati ai vari codici "Partitario Agente". Questo attributo indica il codice del partitario o agente collegato al movimento, utilizzato per tracciare le interazioni con specifici soggetti all'interno del sistema di magazzino.\\
+I dati indicano una disparità significativa nella distribuzione delle frequenze. Il codice con la maggiore frequenza di eventi è "0", associato a 357.328 casi e rappresentando il 99,00\% degli eventi totali. Questo suggerisce che la stragrande maggioranza delle operazioni non è legata a un partitario agente specifico, il che potrebbe indicare che molte transazioni sono gestite in modo generico, senza coinvolgere agenti o partitari specifici.\\
+Gli altri codici, come "1.000", "1.719", "1.692", e "1.577", presentano un numero molto più basso di eventi, variando tra pochi singoli movimenti e fino a un massimo di 44 eventi per il codice "633". Questo denota una differenziazione minore rispetto al caso predominante (0), con questi valori che rappresentano una piccola frazione del totale.
+
+\subsection{Statistics RIF\_ANNO\_DOC}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsRIFANNODOCDatiReali.png}
+    \caption{Statistiche attributo: RIF\_ANNO\_DOC}
+    \label{fig:statistics-RIF-ANNO-DOC}
+\end{figure}
+La schermata "Statistics: RIF\_ANNO\_DOC" analizza la frequenza dei movimenti di magazzino rispetto agli anni di riferimento dei documenti. Il campo "RIF\_ANNO\_DOC" rappresenta l'anno a cui si riferisce il documento che ha generato il movimento di magazzino. Questa analisi è utile per comprendere come i documenti di anni diversi contribuiscano ai movimenti di magazzino nel tempo.\\
+Analizzando la distribuzione dei dati, si osserva una concentrazione significativa nel valore "0", che rappresenta il 97,68\% dei casi, pari a 352.589 movimenti. Questo indica che la stragrande maggioranza dei movimenti non ha un anno di riferimento specifico associato. Ciò potrebbe riflettere l'utilizzo di documenti non temporizzati o registrazioni generiche all'interno del sistema.\\
+Tra gli anni con un numero significativo di movimenti, si notano i dati relativi al 2014, 2015 e 2013, con rispettivamente 6.127, 4.526 e 4.181 casi. Questi anni rappresentano una piccola percentuale del totale, ma offrono un'indicazione di quando sono stati generati i documenti che hanno originato i movimenti di magazzino. Gli altri anni, come il 2010, 2011 e 2016, mostrano un numero molto limitato di movimenti, con valori che variano da 3 a 10 movimenti.
+
+\subsection{Statistics RIF\_TIPO\_DOC}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/StatisticsRIFTIPODOCDatiReali.png}
+    \caption{Statistiche attributo: RIF\_TIPO\_DOC}
+    \label{fig:statistics-RIF-TIPO-DOC}
+\end{figure}
+La schermata "Statistics: RIF\_TIPO\_DOC" fornisce un'analisi dettagliata delle diverse tipologie di documenti a cui i movimenti di magazzino sono associati. Questo campo, "RIF\_TIPO\_DOC", rappresenta la classificazione del tipo di documento che ha generato un determinato movimento, permettendo di tracciare l'origine dei movimenti e di comprendere meglio il loro contesto operativo.\\
+Il dataset presenta un totale di 27 valori distinti per il campo "RIF\_TIPO\_DOC". La frequenza dei casi associati varia notevolmente, con un minimo di 1 movimento per alcune tipologie di documenti e un massimo di 954.353 movimenti. Questo ampio intervallo suggerisce una distribuzione molto irregolare nell'uso di differenti tipi di documenti per generare movimenti di magazzino.\\
+Il valore medio della frequenza è di 36.064,96 movimenti per tipo di documento, con una deviazione standard elevata di 180.103,26. La mediana della distribuzione è significativamente inferiore a 49 movimenti, il che indica che la maggior parte delle tipologie di documenti ha una bassa incidenza, mentre pochi tipi di documenti dominano la maggior parte delle operazioni di magazzino.\\
+Osservando i dati nella tabella delle statistiche, è chiaro che esistono molte tipologie di documenti con un numero estremamente basso di casi (spesso uno o due movimenti). Ciò indica che alcune categorie di documenti sono utilizzate raramente nei processi di magazzino. Ad esempio, i documenti con codici come "22", "19", "21", e "11" hanno tutti una frequenza di solo 1 movimento, con un impatto praticamente trascurabile.\\
+D'altra parte, vi sono alcuni codici, come "27", che mostrano una frequenza di casi leggermente superiore (14 movimenti) rispetto agli altri, pur mantenendosi comunque al di sotto dell'1\% del totale dei movimenti. Tuttavia, nonostante queste variazioni, la maggior parte dei tipi di documenti non genera un numero significativo di movimenti.
 \end{document}
