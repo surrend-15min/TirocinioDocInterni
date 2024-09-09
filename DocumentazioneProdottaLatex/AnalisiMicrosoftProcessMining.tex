@@ -900,4 +900,18 @@ Il dataset presenta un totale di 27 valori distinti per il campo "RIF\_TIPO\_DOC
 Il valore medio della frequenza è di 36.064,96 movimenti per tipo di documento, con una deviazione standard elevata di 180.103,26. La mediana della distribuzione è significativamente inferiore a 49 movimenti, il che indica che la maggior parte delle tipologie di documenti ha una bassa incidenza, mentre pochi tipi di documenti dominano la maggior parte delle operazioni di magazzino.\\
 Osservando i dati nella tabella delle statistiche, è chiaro che esistono molte tipologie di documenti con un numero estremamente basso di casi (spesso uno o due movimenti). Ciò indica che alcune categorie di documenti sono utilizzate raramente nei processi di magazzino. Ad esempio, i documenti con codici come "22", "19", "21", e "11" hanno tutti una frequenza di solo 1 movimento, con un impatto praticamente trascurabile.\\
 D'altra parte, vi sono alcuni codici, come "27", che mostrano una frequenza di casi leggermente superiore (14 movimenti) rispetto agli altri, pur mantenendosi comunque al di sotto dell'1\% del totale dei movimenti. Tuttavia, nonostante queste variazioni, la maggior parte dei tipi di documenti non genera un numero significativo di movimenti.
+
+\subsection{Root cause analysis}
+
+\subsection{Variants}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/VariantsDatiReali.png}
+    \caption{Varianti}
+    \label{fig:variants}
+\end{figure}
+La schermata "Variants" offre una panoramica delle varianti operative nei processi di magazzino, categorizzate in base alla descrizione delle attività svolte. Le varianti rappresentano i diversi percorsi che un caso può seguire all'interno del processo, con ogni percorso costituito da una serie di eventi sequenziali. L'obiettivo di questa schermata è analizzare la distribuzione delle varianti e identificare i percorsi più frequenti e le loro caratteristiche.\\
+La schermata elenca un totale di 14 varianti, con la prima variante che contiene 95.099 casi, rappresentando il 26\% del totale dei casi, seguita dalla seconda variante con 93.705 casi (26\%). Le prime cinque varianti coprono una significativa percentuale del totale dei casi (circa il 90\%), mentre le altre varianti hanno un'incidenza molto minore.\\
+Ogni variante è caratterizzata da una sequenza di eventi che ne definisce il flusso operativo. Ad esempio, la prima variante contiene le attività "Scarico componenti" (ScCo) e "Carico da produzione" (CaDP), indicando una fase comune del processo di scarico e carico di materiali. Nella seconda variante, si osserva una combinazione simile, mentre la terza variante introduce un ulteriore evento nello schema, aumentando il numero complessivo di eventi a tre.\\
+La leggenda a destra della schermata fornisce una chiara decodifica degli acronimi che descrivono le attività. Ad esempio, "ScCo" si riferisce a "Scarico componenti", mentre "CaDP" rappresenta "Carico da produzione". Questo sistema di codifica semplifica la lettura e interpretazione del flusso operativo di ciascuna variante.\\
 \end{document}
