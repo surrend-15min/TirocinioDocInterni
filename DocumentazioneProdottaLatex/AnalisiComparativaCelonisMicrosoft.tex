@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[includeheadfoot, margin=1em,headheight=2em]{geometry}
+\usepackage{titling}
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
+\usepackage{graphicx}
+\usepackage{float}
+\providecommand{\versionnumber}{1.0.0}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[italian]{babel}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\setlength{\droptitle}{-6em}
+
+%font
+\usepackage[defaultfam,tabular,lining]{montserrat}
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\fontfamily{Montserrat-TOsF}\selectfont #1}}
+
+%custom bold 
+\usepackage[outline]{contour}
+\usepackage{xcolor}
+\newcommand{\custombold}{\contour{black}}
+
+%table colors
+\usepackage{color, colortbl}
+\definecolor{Blue}{rgb}{0.51,0.68,0.79}
+\definecolor{LightBlue}{rgb}{0.82,0.87,0.90}
+\definecolor{LighterBlue}{rgb}{0.93,0.95,0.96}
+
+%Header
+\usepackage{fancyhdr, xcolor}
+\pagestyle{fancy}
+\let\oldheadrule\headrule% Copy \headrule into \oldheadrule
+\renewcommand{\headrule}{\color{Blue}\oldheadrule}% Add colour to \headrule
+\renewcommand{\headrulewidth}{0.2em}
+\fancyhead[L]{Analisi comparativa}
+\fancyhead[C]{Samuele Vignotto}
+\fancyhead[R]{\includegraphics[height=1cm]{Logo/Y_LOGO-SOLO.png}}
+\setcounter{secnumdepth}{0}
+
+\title{\Huge{\textbf{Analisi comparativa}}\vspace{-1em}}
+\author{Samuele Vignotto}
+\date{}
+\begin{document}
+\maketitle
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6cm, height=6cm]{Logo/Y_LOGO-SOLO.png}
+  \label{fig:immagine}
+\end{figure}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Integrazione dei dati}
+L'integrazione dei dati è un aspetto cruciale per il successo del process mining, poiché consente di ottenere una visione completa e coerente delle operazioni aziendali attraverso la raccolta e l'elaborazione di dati provenienti da diversi sistemi aziendali. Sia Celonis che Microsoft Process Mining offrono potenti funzionalità di integrazione, ma con approcci distinti che riflettono le diverse architetture delle due piattaforme.
+
+\subsection{Celonis}
+Celonis è conosciuto per la sua vasta flessibilità nella gestione e integrazione dei dati. La piattaforma supporta un'ampia gamma di fonti, da sistemi on-premise a soluzioni cloud, permettendo di estrarre dati in tempo reale da sistemi ERP (Enterprise Resource Planning), CRM (Customer Relationship Management), database e altre applicazioni aziendali. Celonis utilizza connettori preconfigurati per sistemi complessi come SAP, Oracle EBS, Salesforce, e ServiceNow, garantendo un'integrazione continua e dinamica delle informazioni.\\
+Un aspetto distintivo di Celonis è la sua capacità di lavorare con dati non strutturati, grazie all'integrazione con file CSV, Excel e JSON, oltre a connettori per database relazionali come Microsoft SQL, Oracle, PostgreSQL e soluzioni cloud come Snowflake. Celonis gestisce l'integrazione tramite API e connettori dedicati, che consentono di estrarre i dati direttamente dalle tabelle, offrendo una sincronizzazione continua tra la fonte e il modello di dati utilizzato per le analisi).\\
+Un vantaggio aggiuntivo della piattaforma è la creazione e la manutenzione di pool di dati, che servono come contenitori per le diverse fonti, facilitando la gestione e il monitoraggio dei dati in tempo reale. Ciò assicura che tutte le analisi siano aggiornate e riflettano lo stato attuale dei processi aziendali. Tuttavia, questa flessibilità comporta anche una certa complessità nella manutenzione delle connessioni ai sistemi, soprattutto in ambienti IT eterogenei.\\
+
+\subsection{Microsoft Process Mining}
+Microsoft offre una perfetta integrazione con il suo ecosistema Power Platform, in particolare tramite strumenti come Power BI, Power Automate e Dataverse. L'architettura di Microsoft consente di connettersi facilmente a numerosi sistemi tramite connettori preconfigurati per applicazioni SaaS (Software as a Service) come SAP, Salesforce e Dynamics 365, rendendo semplice l'estrazione dei log degli eventi e altri dati rilevanti per l'analisi dei processi.\\
+Microsoft utilizza Power Query, un potente strumento di trasformazione dei dati integrato in Power BI, che consente di connettersi a una vasta gamma di fonti, inclusi servizi web, API, e database on-premise, semplificando la preparazione dei dati per il process mining. La flessibilità offerta da Power Query consente alle organizzazioni di combinare facilmente dati strutturati da varie fonti, facilitando l'analisi e l'ottimizzazione dei processi.\\
+Un altro vantaggio significativo di Microsoft è la sua integrazione nativa con Azure Data Lake e Azure SQL Database, che permette di gestire grandi volumi di dati con facilità, migliorando la scalabilità delle operazioni. Inoltre, Microsoft garantisce che tutte le sue applicazioni si connettano perfettamente, consentendo agli utenti di condividere dati attraverso piattaforme come SharePoint e Teams, facilitando la collaborazione tra i team aziendali.
+
+\subsection{Comparazione}
+\custombold{Celonis} eccelle nella sua capacità di integrare dati da una vasta gamma di fonti, siano esse sistemi legacy, cloud o database relazionali. La piattaforma offre flessibilità e strumenti avanzati per la preparazione e la trasformazione dei dati, rendendola adatta a organizzazioni che lavorano con ecosistemi complessi e diversificati. Tuttavia, questa flessibilità può comportare una maggiore complessità nella gestione delle connessioni e delle risorse durante i processi di estrazione e trasformazione.\\
+\custombold{Microsoft Process Mining}, dal canto suo, si concentra sull'integrazione perfetta con il suo ecosistema e offre strumenti già noti e utilizzati come Power BI, Power Automate e Azure, rendendo l'integrazione estremamente fluida e naturale per le organizzazioni che già utilizzano queste piattaforme. Questo approccio facilita la gestione centralizzata dei dati e la collaborazione tra i vari team aziendali, offrendo un'esperienza più immediata e integrata rispetto a Celonis.\\
+In sintesi, mentre Celonis offre una maggiore flessibilità e supporto per un'ampia varietà di fonti dati, Microsoft punta su un'integrazione perfetta con il proprio ecosistema, rendendo più semplice e immediata la gestione e l'elaborazione dei dati aziendali all'interno della sua suite di applicazioni.
+
+\section{Visualizzazione e mappatura dei processi}
+La visualizzazione dei processi aziendali gioca un ruolo cruciale nell'identificazione delle inefficienze e nell'ottimizzazione dei flussi di lavoro. Sia Celonis che Microsoft Process Mining offrono strumenti avanzati per la mappatura dei processi, ma si distinguono per il modo in cui presentano e organizzano le informazioni.
+
+\subsection{Celonis}
+Celonis si concentra su un approccio visivo e interattivo, fornendo una panoramica completa dei processi aziendali attraverso strumenti come il Process Explorer e il Process Overview. Il primo permette agli utenti di vedere i flussi di lavoro attraverso una rete dinamica, con nodi che rappresentano le diverse attività e collegamenti che evidenziano le transizioni tra di esse. La complessità del grafo di Celonis riflette la realtà operativa delle aziende, dove le attività non seguono un percorso lineare, ma si intrecciano in modo complesso e dinamico.\\
+Il Process Overview di Celonis è uno strumento molto potente per identificare inefficienze, colli di bottiglia e deviazioni dai processi standard. Mostra in modo intuitivo come le operazioni si sviluppano realmente, consentendo agli utenti di esplorare i dettagli del flusso di lavoro e di monitorare i principali indicatori di performance (KPI) come il numero di casi al giorno e i tempi di attraversamento. Questo permette una navigazione facile e una comprensione immediata delle dinamiche del processo, supportata anche dalla possibilità di simulare scenari e analizzare le varianti del flusso.
+
+\subsection{Microsoft Process Mining}
+Microsoft adotta un approccio diverso con la sua Process Map, che si focalizza sull'illustrazione dettagliata delle attività e delle varianti. Ogni attività nel flusso di lavoro è tracciata come un nodo, e le frecce collegano le attività mostrando la sequenza e la direzione delle operazioni. La "Process Map" è uno strumento chiave per comprendere rapidamente come si sviluppano i processi in tempo reale, offrendo una visualizzazione chiara di colli di bottiglia e deviazioni. Questa funzione è particolarmente utile per monitorare la frequenza e la durata delle attività, permettendo agli utenti di identificare con facilità dove i processi rallentano o dove si verificano errori.\\
+Inoltre, Microsoft Process Mining offre strumenti di comparazione dei processi, come il Process Compare, che consente di mettere a confronto diverse varianti di processo all'interno della stessa organizzazione o tra unità diverse. Questo permette di vedere in modo immediato le differenze operative e di individuare best practice aziendali, con una particolare attenzione ai tempi di esecuzione e alle risorse coinvolte.\\
+
+\subsection{Comparazione}
+\custombold{Celonis} eccelle nella visualizzazione in tempo reale dei processi, offrendo una rappresentazione costantemente aggiornata e altamente dettagliata. La sua forza sta nella capacità di fornire una mappatura dei processi automatizzata, che riduce i tempi e i costi legati alla raccolta e all'aggiornamento dei dati manuali.\\
+\custombold{Microsoft}, pur offrendo funzionalità di visualizzazione potenti, è più frammentato e richiede l'integrazione di più strumenti (Power Automate e Power BI). La sua principale attrattiva è la semplicità d'uso per le aziende già immerse nell'ecosistema Microsoft, che possono sfruttare la familiarità con questi strumenti per creare facilmente mappe di processo personalizzate e visualizzazioni intuitive.\\
+Entrambi gli strumenti, quindi, offrono approcci validi, ma con una diversa profondità e maturità nella visualizzazione dei processi.
+
+\section{Analisi dei dati}
+
+\subsection{Celonis}
+
+\subsubsection{Process Overview}
+La funzionalità Process Overview di Celonis fornisce una panoramica completa e visiva dei processi aziendali. Grazie alla capacità di aggregare e visualizzare dati provenienti da più fonti, permette agli utenti di analizzare l’efficienza complessiva del processo, identificare colli di bottiglia e rilevare deviazioni rispetto ai flussi ideali. L'interfaccia grafica consente di esplorare i processi in tempo reale, offrendo una comprensione approfondita delle dinamiche operative aziendali.
+
+\subsubsection{Process Throughput Times}
+Process Throughput Times è una funzionalità avanzata di Celonis che consente di monitorare e analizzare i tempi di attraversamento dei processi. Questa funzione identifica i tempi medi necessari per completare ogni fase del processo, mettendo in evidenza le inefficienze e i colli di bottiglia che possono prolungare i tempi di esecuzione.
+
+\subsubsection{Process Activities}
+La funzionalità Process Activities di Celonis consente di esaminare in dettaglio le attività principali e secondarie di un processo. Utilizza visualizzazioni intuitive, come diagrammi a bolle, per rappresentare la frequenza e l'intensità delle attività svolte all'interno di un processo aziendale. Questa visione aiuta a identificare le attività più frequenti e critiche, nonché quelle meno efficienti, facilitando l'ottimizzazione e la razionalizzazione delle operazioni.
+
+\subsection{Microsoft}
+La funzione Statistics dello strumento di Process Mining di Microsoft si concentra sull’analisi numerica dei processi aziendali. Questa funzionalità consente di esplorare dati statistici sulle varianti di processo, sui tempi di esecuzione e sulle deviazioni, offrendo informazioni cruciali per comprendere l’efficienza operativa. Integrato con strumenti come Power BI, Statistics permette di creare report avanzati e personalizzati per monitorare i processi e suggerire aree di miglioramento.
+
+\subsection{Comparazione}
+La funzionalità Process Overview di Celonis offre una panoramica completa del processo analizzato, aggregando dati da diverse fonti per esplorare l'efficienza, identificare deviazioni e aree di miglioramento. Viene evidenziata la complessità operativa e la frequenza di casi gestiti.\\
+Questo approccio è utile per comprendere l'efficienza globale del processo e per rilevare le tendenze temporali.\\
+La funzionalità Statistics di Microsoft, d'altro canto, si concentra su una visualizzazione più granulare dei dati tramite statistiche sui casi e sugli eventi. Ad esempio, viene offerta la possibilità di analizzare le varianti e le deviazioni rispetto ai flussi ideali, con integrazione diretta con strumenti come Power BI per fornire report dettagliati sui colli di bottiglia e inefficienze. Entrambi gli strumenti, quindi, forniscono un’analisi simile in termini di obiettivi, ma Celonis è orientato verso una rappresentazione interattiva, mentre Microsoft si integra più strettamente con il proprio ecosistema di dati e visualizzazioni.\\
+La funzionalità Process Throughput Times di Celonis analizza il tempo di attraversamento medio del processo, evidenziando i colli di bottiglia e le inefficienze che prolungano i tempi. Celonis mostra sia i tempi medi sia le distribuzioni per fasce temporali, identificando così le eccezioni. L’analisi si spinge anche a identificare le attività specifiche che rallentano il processo.\\
+La funzionalità Edge Statistics di Microsoft è simile nel fornire analisi dettagliate dei tempi di attraversamento, ma con una maggiore enfasi sulla visualizzazione delle connessioni tra attività. Viene mostrata la frequenza e il tempo medio necessario per passare da un'attività all'altra, il che aiuta a identificare dove si verificano i rallentamenti. Entrambi gli strumenti offrono capacità simili di misurazione, ma Celonis sembra concentrarsi di più sui singoli casi estremi per migliorare la velocità complessiva del processo.\\
+Nella sezione Process Activities di Celonis, le attività del processo vengono rappresentate graficamente attraverso bolle, dove la dimensione e il colore indicano la frequenza e l'intensità delle attività stesse. Questa visualizzazione intuitiva consente di identificare rapidamente le attività più comuni suggerendo potenziali opportunità di ottimizzazione operativa. Inoltre, la sezione consente di avere una visione d'insieme sulla distribuzione delle attività secondarie e principali, agevolando l'identificazione delle attività più prevalenti.\\
+In Microsoft, la funzionalità Statistics Case Overview si focalizza invece sull'analisi numerica delle attività e delle transizioni tra di esse. Le statistiche sugli eventi e le varianti di processo sono visibili e consentono di comprendere come ciascun caso fluisce attraverso il processo. La visualizzazione è meno interattiva rispetto a quella di Celonis, ma offre una granularità superiore sui singoli passaggi del flusso di lavoro.\\
+In sintesi, Celonis e Microsoft offrono strumenti simili per l'analisi dei processi, ma con approcci diversi. Celonis si distingue per la sua rappresentazione visiva interattiva e la capacità di evidenziare visivamente le inefficienze e le varianti. Microsoft, d'altra parte, eccelle nell'integrazione con il suo ecosistema (Power BI, Power Automate) e offre un'analisi più strutturata e basata sui dati.
+
+\end{document}
