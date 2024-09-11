@@ -35,7 +35,7 @@
 \let\oldheadrule\headrule% Copy \headrule into \oldheadrule
 \renewcommand{\headrule}{\color{Blue}\oldheadrule}% Add colour to \headrule
 \renewcommand{\headrulewidth}{0.2em}
-\fancyhead[L]{Studio Celonis}
+\fancyhead[L]{Studio Microsoft Process Mining}
 \fancyhead[C]{Samuele Vignotto}
 \fancyhead[R]{\includegraphics[height=1cm]{Logo/Y_LOGO-SOLO.png}}
 \setcounter{secnumdepth}{0}
@@ -902,6 +902,25 @@ Osservando i dati nella tabella delle statistiche, è chiaro che esistono molte 
 D'altra parte, vi sono alcuni codici, come "27", che mostrano una frequenza di casi leggermente superiore (14 movimenti) rispetto agli altri, pur mantenendosi comunque al di sotto dell'1\% del totale dei movimenti. Tuttavia, nonostante queste variazioni, la maggior parte dei tipi di documenti non genera un numero significativo di movimenti.
 
 \subsection{Root cause analysis}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/RootCauseAnalysisSettingsDatiReali.png}
+    \caption{Root Cause Analysis: settings}
+    \label{fig:root-cause-analysis-settings}
+\end{figure}
+Nella schermata di configurazione delle analisi l'utente può impostare una metrica specifica da analizzare, in questo caso la durata dei casi (Case duration). È possibile scegliere tra diverse metriche, come il tempo attivo del caso, il numero di eventi o il numero di rework, per individuare le cause principali che influiscono su queste misure.\\
+Il grafico iniziale nella schermata di impostazione offre una visione preliminare della distribuzione della durata dei casi. Il grafico mostra una concentrazione significativa di casi con durate molto brevi, seguiti da un calo rapido, il che suggerisce che la maggior parte dei casi sono completati in tempi relativamente contenuti, mentre solo pochi presentano durate più lunghe.\\
+L'utente, in questa fase, non ha ancora avviato un'analisi dettagliata, ma ha definito quali metriche esplorare e su quali concentrarsi, fornendo una base per l'elaborazione successiva. La semplicità dell'interfaccia permette di selezionare facilmente le metriche che potrebbero rivelare informazioni critiche per migliorare il processo.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgMicrosoft/DatiReali/RootCauseAnalysisDatiReali.png}
+    \caption{Root Cause Analysis}
+    \label{fig:root-cause-analysis}
+\end{figure}
+La seconda schermata rappresenta il risultato dell'analisi vera e propria. Utilizzando i dati reali, l'algoritmo ha suddiviso i casi in base a variabili come il numero di eventi e altre metriche rilevanti, evidenziando quali fattori influenzano maggiormente la durata dei casi.\\
+Il diagramma a blocchi mostra chiaramente come l'algoritmo divide i casi, creando delle biforcazioni per identificare gruppi di casi che condividono caratteristiche comuni. Ad esempio, il numero di eventi è uno dei principali criteri utilizzati per segmentare i dati. Questo significa che la frequenza con cui si verificano gli eventi ha un impatto rilevante sulla durata complessiva dei casi.\\
+In questa analisi, l'algoritmo suggerisce diverse biforcazioni: si osservano scissioni basate sul numero di eventi, e ulteriori suddivisioni sono create per analizzare in dettaglio la durata dei casi rimanenti. Per ogni blocco, vengono forniti indicatori chiave come la durata media, il numero di eventi e altre metriche che permettono di capire quali casi sono più critici in termini di performance.\\
+La suddivisione progressiva dei casi in gruppi consente di individuare dove si concentrano i problemi più significativi. Ad esempio, i casi con un numero elevato di eventi tendono ad avere durate maggiori, evidenziando potenziali inefficienze nel processo che potrebbero essere causate da loop o ri-lavorazioni.
 
 \subsection{Variants}
 \begin{figure}[H]
