@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[includeheadfoot, margin=1em,headheight=2em]{geometry}
+\usepackage{titling}
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
+\usepackage{graphicx}
+\usepackage{float}
+\providecommand{\versionnumber}{1.0.0}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[italian]{babel}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\setlength{\droptitle}{-6em}
+
+%font
+\usepackage[defaultfam,tabular,lining]{montserrat}
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\fontfamily{Montserrat-TOsF}\selectfont #1}}
+
+%custom bold 
+\usepackage[outline]{contour}
+\usepackage{xcolor}
+\newcommand{\custombold}{\contour{black}}
+
+%table colors
+\usepackage{color, colortbl}
+\definecolor{Blue}{rgb}{0.51,0.68,0.79}
+\definecolor{LightBlue}{rgb}{0.82,0.87,0.90}
+\definecolor{LighterBlue}{rgb}{0.93,0.95,0.96}
+
+%Header
+\usepackage{fancyhdr, xcolor}
+\pagestyle{fancy}
+\let\oldheadrule\headrule% Copy \headrule into \oldheadrule
+\renewcommand{\headrule}{\color{Blue}\oldheadrule}% Add colour to \headrule
+\renewcommand{\headrulewidth}{0.2em}
+\fancyhead[L]{Studio IBM Process Mining}
+\fancyhead[C]{Samuele Vignotto}
+\fancyhead[R]{\includegraphics[height=1cm]{Logo/Y_LOGO-SOLO.png}}
+\setcounter{secnumdepth}{0}
+
+\title{\Huge{\textbf{IBM Process Mining}}\vspace{-1em}}
+\author{Samuele Vignotto}
+\date{}
+\begin{document}
+\maketitle
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6cm, height=6cm]{Logo/Y_LOGO-SOLO.png}
+  \label{fig:immagine}
+\end{figure}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+
+\section{Formati di file accettati}
+
+\section{Fonti di dati supportate}
+
+\section{Funzionalità}
+
+\section{Implementazioni pratiche: simulazioni}
+
+\end{document}
