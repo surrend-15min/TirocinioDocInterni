@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[includeheadfoot, margin=1em,headheight=2em]{geometry}
+\usepackage{titling}
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
+\usepackage{graphicx}
+\usepackage{float}
+\providecommand{\versionnumber}{1.0.0}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[italian]{babel}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\setlength{\droptitle}{-6em}
+
+%font
+\usepackage[defaultfam,tabular,lining]{montserrat}
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\fontfamily{Montserrat-TOsF}\selectfont #1}}
+
+%custom bold 
+\usepackage[outline]{contour}
+\usepackage{xcolor}
+\newcommand{\custombold}{\contour{black}}
+
+%table colors
+\usepackage{color, colortbl}
+\definecolor{Blue}{rgb}{0.51,0.68,0.79}
+\definecolor{LightBlue}{rgb}{0.82,0.87,0.90}
+\definecolor{LighterBlue}{rgb}{0.93,0.95,0.96}
+
+%Header
+\usepackage{fancyhdr, xcolor}
+\pagestyle{fancy}
+\let\oldheadrule\headrule% Copy \headrule into \oldheadrule
+\renewcommand{\headrule}{\color{Blue}\oldheadrule}% Add colour to \headrule
+\renewcommand{\headrulewidth}{0.2em}
+\fancyhead[L]{Studio ARIS}
+\fancyhead[C]{Samuele Vignotto}
+\fancyhead[R]{\includegraphics[height=1cm]{Logo/Y_LOGO-SOLO.png}}
+\setcounter{secnumdepth}{0}
+
+\title{\Huge{\textbf{ARIS}}\vspace{-1em}}
+\author{Samuele Vignotto}
+\date{}
+\begin{document}
+\maketitle
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6cm, height=6cm]{Logo/Y_LOGO-SOLO.png}
+  \label{fig:immagine}
+\end{figure}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+ARIS Process Mining è uno strumento progettato per supportare le organizzazioni nell'analisi e nell'ottimizzazione dei propri processi aziendali. Sviluppato da Software AG, ARIS Process Mining offre una profonda comprensione del modo in cui i processi vengono effettivamente eseguiti all'interno di un'organizzazione, analizzando i dati storici raccolti da vari sistemi aziendali e ricostruendo i flussi di lavoro reali. Questo consente di identificare inefficienze, colli di bottiglia e deviazioni rispetto ai processi ideali o pianificati. Una delle principali caratteristiche di ARIS è la capacità di visualizzare in modo dettagliato e intuitivo i processi aziendali. Attraverso dashboard interattive e rappresentazioni grafiche avanzate, gli utenti possono ottenere una visione completa del ciclo di vita dei processi, evidenziando le aree critiche che necessitano di miglioramenti. ARIS si distingue anche per le sue potenti funzionalità di analisi, che includono il monitoraggio continuo delle performance dei processi e l'identificazione automatica di anomalie. Grazie alla sua integrazione con altre piattaforme e tecnologie di automazione, ARIS facilita la creazione di processi automatizzati e promuove la digitalizzazione delle operazioni aziendali, riducendo l'intervento umano e migliorando l'efficienza operativa. Inoltre, ARIS Process Mining supporta funzionalità di simulazione avanzate che consentono di testare scenari di ottimizzazione e prevedere l'impatto di eventuali modifiche sui processi aziendali. Questo approccio basato sui dati migliora la capacità decisionale dell'azienda, permettendo un'implementazione più efficace di strategie di ottimizzazione e trasformazione digitale.
+
+\section{Formati dei dati supportati}
+
+\subsection{CSV (Comma-Separated Values)}
+Utilizzato per l'importazione e l'esportazione di dati di origine. È il formato principale per caricare dati da sistemi aziendali e fonti esterne.
+
+\section{Fonti di dati supportate}
+\subsection{SAP}
+ARIS Process Mining è strettamente integrato con i sistemi SAP, permettendo l'estrazione dei dati di processo direttamente dai sistemi ERP di SAP. Questa integrazione consente di analizzare i processi aziendali senza la necessità di esportare manualmente i dati.
+\subsection{JDBC (Java Database Connectivity)}
+ARIS supporta JDBC per la connessione diretta a vari database relazionali, come Oracle, Microsoft SQL Server e altri database compatibili. Questa connessione consente di estrarre in tempo reale i dati necessari per l'analisi dei processi.
+\subsection{Data ingestion API}
+ARIS offre un'opzione avanzata di connessione tramite API, che consente di estrarre dati da diverse fonti esterne. Questo amplia notevolmente le possibilità di integrazione, permettendo di collegarsi a numerosi sistemi aziendali o applicazioni.
+
+\section{Funzionalità}
+\subsection{Process overview}
+La funzionalità Process Overview di ARIS fornisce la possibilità di accedere alle metriche chiave che offrono informazioni essenziali per l'analisi dei processi. Tra queste, vi sono il numero di casi e il tempo medio di esecuzione.\\
+Inoltre, l'interfaccia è altamente interattiva, permettendo agli utenti di filtrare le informazioni per ottenere approfondimenti mirati e identificare eventuali anomalie o variazioni.
+\subsection{Process Explorer}
+La funzionalità Process Explorer di ARIS Process Mining offre una rappresentazione interattiva e visiva dei processi aziendali, permettendo di esplorarli in modo dettagliato. Questo strumento consente agli utenti di visualizzare le diverse fasi del processo, identificare varianti e analizzare le connessioni tra le attività eseguite.\\
+Una delle caratteristiche principali di Process Explorer è la capacità di esplorare le varianti del processo, il che consente di individuare eventuali deviazioni dal flusso di lavoro standard o inefficienze operative. Questo strumento è utile per identificare punti di blocco, analizzare i colli di bottiglia e confrontare i processi reali con quelli pianificati. Inoltre, integra funzionalità di filtraggio che permettono agli utenti di concentrarsi su specifici passaggi o metriche del processo, facilitando una diagnosi mirata dei problemi.
+\subsection{Compliance}
+La funzionalità Compliance di ARIS Process Mining permette di monitorare l'aderenza dei processi aziendali rispetto a modelli predefiniti e alle regole operative stabilite. Questa funzionalità consente di confrontare l'esecuzione effettiva dei processi con il modello teorico, verificando che siano seguiti correttamente i passaggi stabiliti dalle politiche aziendali e dalle normative.\\
+Il processo di verifica avviene attraverso il confronto con modelli di processo definiti in linguaggi come BPMN. ARIS analizza il flusso delle attività e genera metriche di conformità, fornendo un "compliance rate" che indica la percentuale di casi che seguono correttamente il processo definito. In caso di violazioni, il sistema segnala dove avvengono deviazioni rispetto alle regole stabilite, permettendo di identificare e correggere eventuali inefficienze o potenziali rischi di non conformità.
+\subsection{App Builder}
+La funzionalità App Builder di ARIS Process Mining consente agli utenti di creare applicazioni personalizzate per l'analisi dei processi aziendali. Questa funzione è estremamente versatile e permette di combinare diversi componenti grafici, come grafici, tabelle e KPI, per costruire dashboard personalizzate che rispondano a esigenze specifiche dell'organizzazione.\\
+L'App Builder supporta la creazione di colonne calcolate direttamente all'interno dell'applicazione, permettendo di eseguire calcoli su variabili e KPI senza dover ricaricare i dati.
+\end{document}
