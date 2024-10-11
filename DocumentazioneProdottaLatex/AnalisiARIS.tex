@@ -238,4 +238,55 @@ Inoltre, è stata associata a questa tabella un'altra tabella contenente le info
     \item \custombold{SE\_PRZ\_MEDIO\_NO\_VAL}: indica se il movimento di magazzino viene considerato per il calcolo del prezzo medio anche se privo di valore (Y/N).
 \end{itemize}
 A causa della limitazione della licenza dello strumento di process mining, l'analisi è stata eseguita su un subset della tabella, limitato a un massimo di 100 MB di dati. Questo implica che non tutti i dati disponibili nel database sono stati utilizzati, ma solo quelli necessari e sufficienti per condurre l'analisi.
+
+\subsection{Process explorer}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgARIS/DatiReali/ProcessExplorerDatiReali.png}
+    \caption{Mappa del processo}
+    \label{fig:process-map}
+\end{figure}
+Uno dei principali vantaggi del diagramma generato da ARIS è la sua capacità di rappresentare in modo esplicito la complessità del processo di produzione e gestione del magazzino. Il processo non è lineare e mostra una rete intricata di collegamenti tra vari passaggi, come l’acquisto dei componenti, lo scarico dei materiali, la gestione della produzione e le fasi successive legate a vendita e spedizione. Grazie ai dati forniti dal sistema ERP, come il NRO\_REGISTRAZIONE (numero di registrazione del movimento) e le CAUSALI del movimento (come il codice del magazzino e la valuta), ARIS è in grado di rappresentare fedelmente il processo reale, evidenziando tutte le possibili diramazioni.\\
+Grazie alla visualizzazione dei collegamenti tra eventi, come l'acquisto e lo scarico componenti, è possibile ottenere una chiara comprensione della catena di approvvigionamento e produzione.\\
+Un altro vantaggio della visualizzazione di ARIS è la flessibilità del processo mostrato attraverso i flussi tratteggiati. Questi flussi alternativi indicano che il sistema è in grado di gestire scenari diversi e adattarsi a variabili come la disponibilità di materiali, il cambiamento nelle richieste dei clienti o modifiche nella catena di approvvigionamento.\\
+Uno svantaggio del diagramma di ARIS è che, sebbene mostri il flusso delle attività, non è immediatamente chiaro dove si trovino i colli di bottiglia o le inefficienze operative. L'assenza di indicazioni visive o metriche immediate che identifichino questi aspetti (ad esempio, tempi di attesa o sovraccarico di lavoro in una determinata fase).\\
+
+\subsection{Process overview}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgARIS/DatiReali/ProcessOverview1DatiReali.png}
+    \caption{Panoramica delle metriche chiave del processo}
+    \label{fig:process-overview-1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgARIS/DatiReali/ProcessOverview2DatiReali.png}
+    \caption{Distribuzione del tempo di attraversamento dei casi}
+    \label{fig:process-overview-2}
+\end{figure}
+L'analisi del process overview di ARIS mostra un quadro dettagliato delle performance aziendali in termini di gestione dei processi e dei movimenti di magazzino. Una delle prime informazioni rilevanti è il numero medio di casi avviati al giorno, pari a 128,05. Il grafico evidenzia una crescita progressiva a partire dal 2013, con un aumento significativo del numero di casi fino al 2015. Questo aumento, visibile anche nel grafico dei casi mensili, potrebbe essere indicativo di una crescita dell'attività produttiva, una fase di espansione aziendale o una maggiore complessità operativa. Tuttavia, dopo il picco, si osserva un calo altrettanto rapido, il che potrebbe suggerire una riduzione della domanda o una razionalizzazione dei processi produttivi.\\
+L'analisi del numero di attività avviate per giorno, pari a 252,57, suggerisce che ogni caso comporta l'avvio di più attività, a conferma della complessità e articolazione delle operazioni di magazzino. Questo dato evidenzia la capacità dell'azienda di gestire molteplici fasi operative in parallelo, mantenendo un flusso di lavoro dinamico. Tuttavia, questa complessità, se non adeguatamente gestita, potrebbe portare a inefficienze operative, soprattutto nei periodi di picco.\\
+Il numero medio di attività per caso, pari a 1,97, indica che in media ogni caso coinvolge meno di due attività. Questo suggerisce che i processi operativi sono relativamente semplici e lineari, con pochi passaggi necessari per completare un caso. Un tale risultato può essere positivo, in quanto riflette una struttura operativa ben organizzata, con pochi ostacoli o passaggi inutili. D'altro canto, potrebbe anche suggerire che non tutti i movimenti o le fasi operative siano stati registrati o tracciati correttamente.\\
+Il tempo di attraversamento medio del processo, pari a 3,14 giorni, rappresenta un tempo di gestione relativamente rapido per un sistema produttivo complesso. Questo valore dimostra che l'azienda è in grado di mantenere un ciclo operativo efficiente, completando i casi in tempi relativamente brevi. Tuttavia, l'assenza di variazioni significative nel tempo di throughput, e il dato di 0 ms riportato nel grafico di distribuzione, potrebbero indicare problemi nella raccolta o nella registrazione accurata dei dati. È possibile che alcune attività non siano state adeguatamente tracciate o che i tempi di latenza non siano stati rilevati con precisione.\\
+Osservando il grafico del numero di casi per mese, si nota una crescita costante fino alla metà del 2015, seguita da una riduzione piuttosto rapida. Questo andamento potrebbe essere collegato a un periodo di espansione aziendale, dove la domanda ha portato a un significativo aumento del numero di operazioni gestite. Successivamente, il calo dei casi potrebbe suggerire una diminuzione della domanda o una saturazione del mercato. Tale fluttuazione mette in evidenza la necessità di una pianificazione attenta delle risorse, specialmente nei periodi di picco, per evitare colli di bottiglia o inefficienze operative.\\
+
+\subsection{Quick check}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgARIS/DatiReali/QuickCheck1DatiReali.png}
+    \caption{Panoramica delle deviazioni nel processo}
+    \label{fig:quick-check-1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgARIS/DatiReali/QuickCheck2DatiReali.png}
+    \caption{Analisi dei casi conformi e devianti}
+    \label{fig:quick-check-2}
+\end{figure}
+Nella sezione Quick Check di ARIS, possiamo analizzare due aspetti fondamentali del processo: la copertura e le deviazioni rispetto al flusso ideale. Il sistema mostra un'ottima copertura complessiva del processo, pari all'88\%, il che significa che la maggior parte delle connessioni tra le attività all'interno dei casi analizzati segue il flusso previsto. Tuttavia, c'è anche un certo numero di deviazioni che meritano attenzione.\\
+Nel grafico della copertura per mese, vediamo un'evoluzione graduale che indica una crescita dell'allineamento tra i casi reali e il flusso di processo ideale a partire dal 2013. Questo miglioramento suggerisce un affinamento continuo del sistema o l'implementazione di nuove procedure che hanno reso il processo più coerente con le aspettative. Tuttavia, durante il periodo di picco tra il 2014 e il 2015, si notano fluttuazioni, probabilmente dovute a una maggiore pressione operativa o a cambiamenti nelle pratiche aziendali che hanno aumentato il rischio di deviazioni.\\
+Passando all'analisi delle deviazioni, si evidenziano diverse aree critiche. Ad esempio, una delle deviazioni principali riguarda il fatto che lo scarico componenti non dovrebbe essere un'attività di inizio, ma è presente come tale in oltre 41.000 casi. Questo potrebbe indicare un problema di sincronizzazione nei dati o una pratica non standardizzata che porta a registrare operazioni fuori dal corretto ordine. Un'altra anomalia riguarda il carico da produzione, che non dovrebbe apparire come attività finale, ma in oltre 26.000 casi ciò accade, suggerendo forse errori nella chiusura delle operazioni o un mancato completamento di altre fasi necessarie.\\
+Le deviazioni relative alle attività non desiderate, come i trasferimenti interni, indicano che circa 5.000 casi contengono operazioni che non dovrebbero far parte del flusso principale. Anche queste potrebbero essere manifestazioni di inefficienze o errori di gestione all'interno del magazzino, che influenzano negativamente i tempi di attraversamento del processo.\\
+Il grafico della sezione Matching Cases offre ulteriori spunti interessanti. Il tasso di conformità, pari all'84,66\%, ci dice che la maggior parte dei casi segue il flusso ideale, ma ci sono comunque deviazioni significative. Il confronto tra i casi conformi e quelli devianti mostra che circa 55.000 casi sono deviati, una cifra che, pur essendo inferiore rispetto ai 305.000 conformi, rappresenta comunque un volume significativo, soprattutto se si considerano gli impatti che tali deviazioni hanno sui tempi e sull'efficienza generale.\\
+La presenza di deviazioni ha infatti un impatto diretto sul throughput time, che aumenta notevolmente quando si verificano anomalie. I casi conformi hanno un tempo di attraversamento medio di circa 1,7 settimane, mentre i casi devianti richiedono quasi tre settimane, mostrando chiaramente l'impatto negativo delle deviazioni sul tempo complessivo di gestione dei processi. Lo stesso impatto si riflette nel numero di attività per caso, che è leggermente più elevato per i casi devianti, indicando che quando il processo non segue il flusso ideale, è spesso necessario un numero maggiore di operazioni per risolvere le problematiche emerse.
 \end{document}
